@@ -16,6 +16,8 @@
 		F95BF9392095C7BE00B52272 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
 		F95BF93E2095CBAF00B52272 /* timing.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9272095C2DE00B52272 /* timing.fs */; };
 		F95BF93F2095CBAF00B52272 /* timing.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9252095C29600B52272 /* timing.vs */; };
+		F95BF9422095D42200B52272 /* vertexWithColor.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9412095D19400B52272 /* vertexWithColor.fs */; };
+		F95BF9432095D42200B52272 /* vertexWithColor.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9402095D17D00B52272 /* vertexWithColor.vs */; };
 		F97C434E2091130C00D83128 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C434D2091130C00D83128 /* main.cpp */; };
 		F97C435220921E3100D83128 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F97C43542092265900D83128 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
@@ -43,6 +45,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F95BF9422095D42200B52272 /* vertexWithColor.fs in CopyFiles */,
+				F95BF9432095D42200B52272 /* vertexWithColor.vs in CopyFiles */,
 				F95BF93E2095CBAF00B52272 /* timing.fs in CopyFiles */,
 				F95BF93F2095CBAF00B52272 /* timing.vs in CopyFiles */,
 			);
@@ -75,6 +79,8 @@
 		F95BF9272095C2DE00B52272 /* timing.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = timing.fs; sourceTree = "<group>"; };
 		F95BF92C2095C40A00B52272 /* timing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = timing; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95BF92E2095C40A00B52272 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F95BF9402095D17D00B52272 /* vertexWithColor.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexWithColor.vs; sourceTree = "<group>"; };
+		F95BF9412095D19400B52272 /* vertexWithColor.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = vertexWithColor.fs; sourceTree = "<group>"; };
 		F97C434B2091130C00D83128 /* hello-triangle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hello-triangle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F97C434D2091130C00D83128 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F97C435720922B9100D83128 /* asLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asLog.cpp; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				F95BF9252095C29600B52272 /* timing.vs */,
+				F95BF9402095D17D00B52272 /* vertexWithColor.vs */,
 			);
 			path = vertex;
 			sourceTree = "<group>";
@@ -148,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				F95BF9272095C2DE00B52272 /* timing.fs */,
+				F95BF9412095D19400B52272 /* vertexWithColor.fs */,
 			);
 			path = fragment;
 			sourceTree = "<group>";
