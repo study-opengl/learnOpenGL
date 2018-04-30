@@ -20,6 +20,8 @@ void progressInput(GLFWwindow* window);
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
+float mixValue = 0.2f;
+
 int main(int argc, const char * argv[]) {
     // insert code here...
     std::cout << "Hello, World!\n";
@@ -153,6 +155,8 @@ int createHelloTriangleWindow() {
     
     while (!glfwWindowShouldClose(window)) {
         progressInput(window);
+
+        shaderProgram.setFloat("mixValue", mixValue);
         
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -186,5 +190,13 @@ void progressInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         asLog("escape pressed");
         glfwSetWindowShouldClose(window, true);
+    } else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+        mixValue += 0.01;
+        mixValue = mixValue > 1.0f ? 1.0f : mixValue;
+        asLog("mix value: %f", mixValue);
+    } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        mixValue -= 0.01;
+        mixValue = mixValue < 0.0f ? 0.0f : mixValue;
+        asLog("mix value: %f", mixValue);
     }
 }
