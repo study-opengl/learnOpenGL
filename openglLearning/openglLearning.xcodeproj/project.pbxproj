@@ -34,6 +34,7 @@
 		F95BF97A2096F6ED00B52272 /* vertexWithColor.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9402095D17D00B52272 /* vertexWithColor.vs */; };
 		F95BF97D2097057B00B52272 /* texture.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97C2096FFD400B52272 /* texture.fs */; };
 		F95BF97E2097057B00B52272 /* texture.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97B2096FFBE00B52272 /* texture.vs */; };
+		F95BF98020970CC700B52272 /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
 		F97C434E2091130C00D83128 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C434D2091130C00D83128 /* main.cpp */; };
 		F97C435220921E3100D83128 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F97C43542092265900D83128 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
@@ -74,6 +75,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F95BF98020970CC700B52272 /* awesomeface.png in CopyFiles */,
 				F95BF97D2097057B00B52272 /* texture.fs in CopyFiles */,
 				F95BF97E2097057B00B52272 /* texture.vs in CopyFiles */,
 				F95BF9762096F6ED00B52272 /* container.jpg in CopyFiles */,
@@ -120,6 +122,7 @@
 		F95BF9732096F58800B52272 /* container.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = container.jpg; sourceTree = "<group>"; };
 		F95BF97B2096FFBE00B52272 /* texture.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
 		F95BF97C2096FFD400B52272 /* texture.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
+		F95BF97F20970CC100B52272 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
 		F97C434B2091130C00D83128 /* hello-triangle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "hello-triangle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F97C434D2091130C00D83128 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F97C435720922B9100D83128 /* asLog.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = asLog.cpp; sourceTree = "<group>"; };
@@ -245,6 +248,7 @@
 		F95BF9722096F55A00B52272 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F95BF97F20970CC100B52272 /* awesomeface.png */,
 				F95BF9732096F58800B52272 /* container.jpg */,
 			);
 			path = Images;

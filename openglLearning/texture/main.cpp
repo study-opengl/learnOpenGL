@@ -78,9 +78,15 @@ unsigned int textureGenarate(const char *imagePath) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, nrChannels;
+    // OpenGL要求y轴0.0坐标是在图片的底部的，但是图片的y轴0.0坐标通常在顶部。很幸运，stb_image.h能够在图像加载时帮助我们翻转y轴，只需要在加载任何图像前加入以下语句即可：
+    stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
+    asLog("%s width: %d, height: %d, channels: %d", imagePath, width, height ,nrChannels);
     if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        GLenum format = GL_RGB;
+        // 当channel == 4 时，说明有alpha通道， == 3 时，只有rgb通道
+        if (nrChannels == 4) { format = GL_RGBA; }
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     } else {
         asLog("can't load image at path: %s", imagePath);
@@ -134,20 +140,29 @@ int createHelloTriangleWindow() {
     // 顶点数组对象
     unsigned int vao = vaoGenerate(vertices, sizeof(vertices) / sizeof(float), indices, sizeof(indices) / sizeof(unsigned int));
     
-    unsigned int texture = textureGenarate("container.jpg");
+    unsigned int texture1 = textureGenarate("container.jpg");
+    unsigned int texture2 = textureGenarate("awesomeface.png");
     
     // uncomment this call to draw in wireframe polygons. 线条模式
     //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    
+    // 激活着色器程序
+    shaderProgram.use();
+    shaderProgram.setInt("texture1", 0);
+    shaderProgram.setInt("texture2", 1);
     
     while (!glfwWindowShouldClose(window)) {
         progressInput(window);
         
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-        // 激活着色器程序
-        shaderProgram.use();
         
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        
+        shaderProgram.use();
         glBindVertexArray(vao);
         // 画矩形
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
