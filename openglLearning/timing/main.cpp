@@ -48,6 +48,7 @@ unsigned int vaoGenerate(float *vertices, unsigned int vertexCount, unsigned int
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
     
+    // 第二个属性
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
     
@@ -133,6 +134,7 @@ int createHelloTriangleWindow() {
 //        float timeValue = glfwGetTime();
 //        float greenValue = sin(timeValue) / 2 + 0.5;
 //        shaderProgram.set4Float("ourColor", 0, greenValue, 0, 1.0);
+//        shaderProgram.setFloat("offset", 0.5);
         
         glBindVertexArray(vao);
         // 画三角形
