@@ -191,6 +191,15 @@ int createHelloTriangleWindow() {
         // 画矩形
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         
+        trans = glm::mat4();
+        trans = glm::translate(trans, glm::vec3(-0.5, 0.5, 0.0));
+        float scale = sin(glfwGetTime());
+        trans = glm::scale(trans, glm::vec3(scale, scale, scale));
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+        
+        // 画矩形
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        
         
         glfwPollEvents();
         glfwSwapBuffers(window);
