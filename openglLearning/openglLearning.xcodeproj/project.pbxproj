@@ -33,6 +33,7 @@
 		F95BF97D2097057B00B52272 /* texture.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97C2096FFD400B52272 /* texture.fs */; };
 		F95BF97E2097057B00B52272 /* texture.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97B2096FFBE00B52272 /* texture.vs */; };
 		F95BF98020970CC700B52272 /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
+		F9695A3D22341142001E6436 /* asLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C435720922B9100D83128 /* asLog.cpp */; };
 		F97C434E2091130C00D83128 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C434D2091130C00D83128 /* main.cpp */; };
 		F97C435220921E3100D83128 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F97C43542092265900D83128 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
@@ -42,7 +43,6 @@
 		F97EC32A2083A0420084A898 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
 		F97EC32E2083A2950084A898 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F9AEB6D6209CD20400163CD0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9AEB6D5209CD20400163CD0 /* main.cpp */; };
-		F9AEB6DB209CD33200163CD0 /* asLog.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC3452083B3F40084A898 /* asLog.c */; };
 		F9AEB6DC209CD3EF00163CD0 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
 		F9AEB6DD209CD3FD00163CD0 /* asLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C435720922B9100D83128 /* asLog.cpp */; };
 		F9AEB6DE209CD41000163CD0 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
@@ -594,7 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9AEB6DB209CD33200163CD0 /* asLog.c in Sources */,
+				F9695A3D22341142001E6436 /* asLog.cpp in Sources */,
 				F97EC32A2083A0420084A898 /* glad.c in Sources */,
 				F97EC32120839A0F0084A898 /* main.mm in Sources */,
 			);
