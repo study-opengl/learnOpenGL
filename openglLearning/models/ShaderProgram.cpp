@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include "asLog.h"
+#include "gtc/type_ptr.hpp"
 
 
 ShaderProgram::ShaderProgram(const char *vertexPath, const char *fragmentPath) {
@@ -67,6 +68,11 @@ void ShaderProgram::setFloat(const std::string &name, float value) const {
 
 void ShaderProgram::set4Float(const std::string &name, float v0, float v1, float v2, float v3) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), v0, v1, v2, v3);
+}
+
+void ShaderProgram::setMatrix4fv(const std::string &name, glm::mat4 matrix) const {
+    unsigned int uniformLocation = glGetUniformLocation(ID, name.c_str());
+    glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 unsigned int ShaderProgram::createShader(const char *const *source, GLenum type) {
