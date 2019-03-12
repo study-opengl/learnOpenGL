@@ -178,10 +178,13 @@ int createHelloTriangleWindow() {
         glBindTexture(GL_TEXTURE_2D, texture2);
         
         glm::mat4 trans;
-        // 平移 (0.5, -0.5)
-        trans = glm::translate(trans, glm::vec3(0.5, -0.5, 0.0));
-        // 随时间旋转
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        glm::mat4 model;
+        glm::mat4 view;
+        glm::mat4 projection;
+        model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0, 0.0, 0.0));
+        view = glm::translate(view, glm::vec3(0.0, 0.0, -3.0f));
+        projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH  / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        trans = projection * view * model;
         
         shaderProgram.setMatrix4fv("transform", trans);
         
@@ -189,16 +192,6 @@ int createHelloTriangleWindow() {
         glBindVertexArray(vao);
         // 画矩形
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        
-        trans = glm::mat4();
-        trans = glm::translate(trans, glm::vec3(-0.5, 0.5, 0.0));
-        float scale = abs(sin(glfwGetTime()));
-        trans = glm::scale(trans, glm::vec3(scale, scale, 1));
-        shaderProgram.setMatrix4fv("transform", trans);
-        
-        // 画矩形
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        
         
         glfwPollEvents();
         glfwSwapBuffers(window);

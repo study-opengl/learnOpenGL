@@ -58,6 +58,10 @@
 		F9AEB6E0209CD49B00163CD0 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F9AEB6E3209CD61300163CD0 /* transform.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9AEB6E2209CD5CA00163CD0 /* transform.fs */; };
 		F9AEB6E4209CD61300163CD0 /* transform.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9AEB6E1209CD5AF00163CD0 /* transform.vs */; };
+		F9BA3C982237FCBD0022ECDC /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
+		F9BA3C992237FCBD0022ECDC /* container.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9732096F58800B52272 /* container.jpg */; };
+		F9BA3C9A2237FCC40022ECDC /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
+		F9BA3C9B2237FCC40022ECDC /* container.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9732096F58800B52272 /* container.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +110,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F9BA3C9A2237FCC40022ECDC /* awesomeface.png in CopyFiles */,
+				F9BA3C9B2237FCC40022ECDC /* container.jpg in CopyFiles */,
 				F9695A9C2237EBD0001E6436 /* coordinate.fs in CopyFiles */,
 				F9695A9D2237EBD0001E6436 /* coordinate.vs in CopyFiles */,
 			);
@@ -135,6 +141,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F9BA3C982237FCBD0022ECDC /* awesomeface.png in CopyFiles */,
+				F9BA3C992237FCBD0022ECDC /* container.jpg in CopyFiles */,
 				F9AEB6E3209CD61300163CD0 /* transform.fs in CopyFiles */,
 				F9AEB6E4209CD61300163CD0 /* transform.vs in CopyFiles */,
 			);

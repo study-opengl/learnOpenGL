@@ -178,10 +178,16 @@ int createHelloTriangleWindow() {
         glBindTexture(GL_TEXTURE_2D, texture2);
         
         glm::mat4 trans;
+        glm::mat4 rotate;
+        glm::mat4 translate;
         // 平移 (0.5, -0.5)
-        trans = glm::translate(trans, glm::vec3(0.5, -0.5, 0.0));
+//        trans = glm::translate(trans, glm::vec3(0.5, -0.5, 0.0));
+        translate = glm::translate(translate, glm::vec3(0.5, -0.5, 0.0));
         // 随时间旋转
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+//        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        rotate = glm::rotate(rotate, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+        
+        trans = translate * rotate;
         
         shaderProgram.setMatrix4fv("transform", trans);
         
