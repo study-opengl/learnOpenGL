@@ -17,63 +17,53 @@
 #include "gtc/type_ptr.hpp"
 
 int createHelloTriangleWindow();
-void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
-void progressInput(GLFWwindow* window);
+void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
+void progressInput(GLFWwindow *window);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
 float mixValue = 0.2f;
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[])
+{
     // insert code here...
     std::cout << "Hello, World!\n";
     createHelloTriangleWindow();
     return 0;
 }
 
-unsigned int vaoGenerate(float *vertices, unsigned int vertexCount, unsigned int *indices, unsigned int indexCount) {
+unsigned int vaoGenerate(float *vertices, unsigned int vertexCount)
+{
     // 顶点数组对象
     unsigned int vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-    
+
     // 顶点缓冲对象
     unsigned int vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(float), vertices, GL_STATIC_DRAW);
-    
-    // 索引缓冲对象
-    unsigned int ebo;
-    glGenBuffers(1, &ebo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indices, GL_STATIC_DRAW);
-    
+
     // 告诉OpenGL该如何解析顶点数据
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-    
+
     // 第二个属性
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
-    
+
     // 此时可以相关数据已经存到vao中，可以解绑vbo和vao
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    // remember: do NOT unbind the EBO while a VAO is active as the bound element buffer object IS stored in the VAO; keep the EBO bound.
-    //    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    
     glDeleteBuffers(1, &vbo);
-    glDeleteBuffers(1, &ebo);
-    
+
     return vao;
 }
 
-unsigned int textureGenarate(const char *imagePath) {
+unsigned int textureGenarate(const char *imagePath)
+{
     unsigned int texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -86,11 +76,13 @@ unsigned int textureGenarate(const char *imagePath) {
     // OpenGL要求y轴0.0坐标是在图片的底部的，但是图片的y轴0.0坐标通常在顶部。很幸运，stb_image.h能够在图像加载时帮助我们翻转y轴，只需要在加载任何图像前加入以下语句即可：
     stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
-    asLog("%s width: %d, height: %d, channels: %d", imagePath, width, height ,nrChannels);
+    asLog("%s width: %d, height: %d, channels: %d", imagePath, width, height, nrChannels);
     if (data) {
         GLenum format = GL_RGB;
         // 当channel == 4 时，说明有alpha通道， == 3 时，只有rgb通道
-        if (nrChannels == 4) { format = GL_RGBA; }
+        if (nrChannels == 4) {
+            format = GL_RGBA;
+        }
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     } else {
@@ -100,7 +92,8 @@ unsigned int textureGenarate(const char *imagePath) {
     return texture;
 }
 
-int createHelloTriangleWindow() {
+int createHelloTriangleWindow()
+{
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -122,92 +115,150 @@ int createHelloTriangleWindow() {
     char buffer[1024];
     getcwd(buffer, 1024);
     printf("The current directory is: %s", buffer);
-    
+
     ///=============================================================================
     /// @name 着色器程序
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
-    ShaderProgram shaderProgram = ShaderProgram("transform.vs", "transform.fs");
-    
+    ShaderProgram shaderProgram = ShaderProgram("coordinate.vs", "coordinate.fs");
+
+//    float vertices[] = {
+//        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
+//        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
+//        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
+//        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
+//        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+//    };
     float vertices[] = {
-        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
-        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // 右上
-        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // 右下
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
+        -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,
+        0.5f,  -0.5f, -0.5f, 1.0f,  0.0f,
+        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
+        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
+        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,
+
+        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
+        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  1.0f,
+        -0.5f, 0.5f,  0.5f,  0.0f,  1.0f,
+        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
+
+        -0.5f, 0.5f,  0.5f,  1.0f,  0.0f,
+        -0.5f, 0.5f,  -0.5f, 1.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
+        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
+        -0.5f, 0.5f,  0.5f,  1.0f,  0.0f,
+
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
+        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
+        0.5f,  -0.5f, -0.5f, 0.0f,  1.0f,
+        0.5f,  -0.5f, -0.5f, 0.0f,  1.0f,
+        0.5f,  -0.5f, 0.5f,  0.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
+
+        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
+        0.5f,  -0.5f, -0.5f, 1.0f,  1.0f,
+        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
+        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
+        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
+
+        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f,
+        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
+        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
+        -0.5f, 0.5f,  0.5f,  0.0f,  0.0f,
+        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f
     };
-    
-    unsigned int indices[] = { // 注意索引从0开始!
-        0, 1, 2,
-        2, 3, 0
-    };
+
     asLog("vertices size: %d", sizeof(vertices));
     // 顶点数组对象
-    unsigned int vao = vaoGenerate(vertices, sizeof(vertices) / sizeof(float), indices, sizeof(indices) / sizeof(unsigned int));
-    
+    unsigned int vao = vaoGenerate(vertices, sizeof(vertices) / sizeof(float));
+
     unsigned int texture1 = textureGenarate("container.jpg");
     unsigned int texture2 = textureGenarate("awesomeface.png");
-    
+
     // uncomment this call to draw in wireframe polygons. 线条模式
     //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    
+
     // 激活着色器程序
     shaderProgram.use();
     shaderProgram.setInt("texture1", 0);
     shaderProgram.setInt("texture2", 1);
-    
+
     //    glm::mat4 trans;
     //    trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
     //    trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
     //
     //    unsigned int transformLoc = glGetUniformLocation(shaderProgram.ID, "transform");
     //    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-    
-    
+
+    glBindVertexArray(vao);
+
+    glm::vec3 cubePositions[] = {
+        glm::vec3(0.0f,  0.0f,  0.0f),
+        glm::vec3(2.0f,  5.0f,  -15.0f),
+        glm::vec3(-1.5f, -2.2f, -2.5f),
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3(2.4f,  -0.4f, -3.5f),
+        glm::vec3(-1.7f, 3.0f,  -7.5f),
+        glm::vec3(1.3f,  -2.0f, -2.5f),
+        glm::vec3(1.5f,  2.0f,  -2.5f),
+        glm::vec3(1.5f,  0.2f,  -1.5f),
+        glm::vec3(-1.3f, 1.0f,  -1.5f)
+    };
+
     while (!glfwWindowShouldClose(window)) {
         progressInput(window);
-        
-        shaderProgram.setFloat("mixValue", mixValue);
-        
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // 开启深度测试
+        glEnable(GL_DEPTH_TEST);
+
+        shaderProgram.setFloat("mixValue", mixValue);
+
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
-        
-        glm::mat4 trans;
-        glm::mat4 model;
+
         glm::mat4 view;
         glm::mat4 projection;
-        model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0, 0.0, 0.0));
         view = glm::translate(view, glm::vec3(0.0, 0.0, -3.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH  / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        trans = projection * view * model;
-        
-        shaderProgram.setMatrix4fv("transform", trans);
-        
-        shaderProgram.use();
-        glBindVertexArray(vao);
-        // 画矩形
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        
+
+        shaderProgram.setMatrix4fv("view", view);
+        shaderProgram.setMatrix4fv("projection", projection);
+
+        for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(glm::vec3); i += 1) {
+            glm::mat4 model;
+            model = glm::translate(model, cubePositions[i]);
+            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * i + 20.0f), glm::vec3(1.5, 0.3, 0.5));
+            shaderProgram.setMatrix4fv("model", model);
+            // 画矩形
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
     glDeleteVertexArrays(1, &vao);
-    
+
     glfwTerminate();
     return 0;
 }
 
-void frameBufferSizeCallback(GLFWwindow* window, int width, int height) {
+void frameBufferSizeCallback(GLFWwindow *window, int width, int height)
+{
     asLog("current window width: %d, height: %d", width, height);
     glViewport(0, 0, width, height);
 }
 
-void progressInput(GLFWwindow* window) {
+void progressInput(GLFWwindow *window)
+{
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         asLog("escape pressed");
         glfwSetWindowShouldClose(window, true);
