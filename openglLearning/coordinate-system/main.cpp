@@ -130,47 +130,47 @@ int createHelloTriangleWindow()
 //        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
 //    };
     float vertices[] = {
-        -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,
-        0.5f,  -0.5f, -0.5f, 1.0f,  0.0f,
-        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
-        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
-        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f,  0.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   0.0f,
+        0.5f,  -0.5f,  -0.5f,   1.0f,   0.0f,
+        0.5f,  0.5f,   -0.5f,   1.0f,   1.0f,
+        0.5f,  0.5f,   -0.5f,   1.0f,   1.0f,
+        -0.5f, 0.5f,   -0.5f,   0.0f,   1.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   0.0f,
 
-        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
-        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  1.0f,
-        -0.5f, 0.5f,  0.5f,  0.0f,  1.0f,
-        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
+        -0.5f, -0.5f,  0.5f,    0.0f,   0.0f,
+        0.5f,  -0.5f,  0.5f,    1.0f,   0.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   1.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   1.0f,
+        -0.5f, 0.5f,   0.5f,    0.0f,   1.0f,
+        -0.5f, -0.5f,  0.5f,    0.0f,   0.0f,
 
-        -0.5f, 0.5f,  0.5f,  1.0f,  0.0f,
-        -0.5f, 0.5f,  -0.5f, 1.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
-        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
-        -0.5f, 0.5f,  0.5f,  1.0f,  0.0f,
+        -0.5f, 0.5f,   0.5f,    1.0f,   0.0f,
+        -0.5f, 0.5f,   -0.5f,   1.0f,   1.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   1.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   1.0f,
+        -0.5f, -0.5f,  0.5f,    0.0f,   0.0f,
+        -0.5f, 0.5f,   0.5f,    1.0f,   0.0f,
 
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
-        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
-        0.5f,  -0.5f, -0.5f, 0.0f,  1.0f,
-        0.5f,  -0.5f, -0.5f, 0.0f,  1.0f,
-        0.5f,  -0.5f, 0.5f,  0.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   0.0f,
+        0.5f,  0.5f,   -0.5f,   1.0f,   1.0f,
+        0.5f,  -0.5f,  -0.5f,   0.0f,   1.0f,
+        0.5f,  -0.5f,  -0.5f,   0.0f,   1.0f,
+        0.5f,  -0.5f,  0.5f,    0.0f,   0.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   0.0f,
 
-        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
-        0.5f,  -0.5f, -0.5f, 1.0f,  1.0f,
-        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
-        0.5f,  -0.5f, 0.5f,  1.0f,  0.0f,
-        -0.5f, -0.5f, 0.5f,  0.0f,  0.0f,
-        -0.5f, -0.5f, -0.5f, 0.0f,  1.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   1.0f,
+        0.5f,  -0.5f,  -0.5f,   1.0f,   1.0f,
+        0.5f,  -0.5f,  0.5f,    1.0f,   0.0f,
+        0.5f,  -0.5f,  0.5f,    1.0f,   0.0f,
+        -0.5f, -0.5f,  0.5f,    0.0f,   0.0f,
+        -0.5f, -0.5f,  -0.5f,   0.0f,   1.0f,
 
-        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f,
-        0.5f,  0.5f,  -0.5f, 1.0f,  1.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
-        0.5f,  0.5f,  0.5f,  1.0f,  0.0f,
-        -0.5f, 0.5f,  0.5f,  0.0f,  0.0f,
-        -0.5f, 0.5f,  -0.5f, 0.0f,  1.0f
+        -0.5f, 0.5f,   -0.5f,   0.0f,   1.0f,
+        0.5f,  0.5f,   -0.5f,   1.0f,   1.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   0.0f,
+        0.5f,  0.5f,   0.5f,    1.0f,   0.0f,
+        -0.5f, 0.5f,   0.5f,    0.0f,   0.0f,
+        -0.5f, 0.5f,   -0.5f,   0.0f,   1.0f
     };
 
     asLog("vertices size: %d", sizeof(vertices));
@@ -188,6 +188,11 @@ int createHelloTriangleWindow()
     shaderProgram.setInt("texture1", 0);
     shaderProgram.setInt("texture2", 1);
 
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+
     //    glm::mat4 trans;
     //    trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
     //    trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
@@ -198,16 +203,16 @@ int createHelloTriangleWindow()
     glBindVertexArray(vao);
 
     glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,  0.0f),
-        glm::vec3(2.0f,  5.0f,  -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f,  -0.4f, -3.5f),
-        glm::vec3(-1.7f, 3.0f,  -7.5f),
-        glm::vec3(1.3f,  -2.0f, -2.5f),
-        glm::vec3(1.5f,  2.0f,  -2.5f),
-        glm::vec3(1.5f,  0.2f,  -1.5f),
-        glm::vec3(-1.3f, 1.0f,  -1.5f)
+        glm::vec3(0.0f,  0.0f,   0.0f),
+        glm::vec3(2.0f,  5.0f,   -15.0f),
+        glm::vec3(-1.5f, -2.2f,  -2.5f),
+        glm::vec3(-3.8f, -2.0f,  -12.3f),
+        glm::vec3(2.4f,  -0.4f,  -3.5f),
+        glm::vec3(-1.7f, 3.0f,   -7.5f),
+        glm::vec3(1.3f,  -2.0f,  -2.5f),
+        glm::vec3(1.5f,  2.0f,   -2.5f),
+        glm::vec3(1.5f,  0.2f,   -1.5f),
+        glm::vec3(-1.3f, 1.0f,   -1.5f)
     };
 
     while (!glfwWindowShouldClose(window)) {
@@ -220,14 +225,9 @@ int createHelloTriangleWindow()
 
         shaderProgram.setFloat("mixValue", mixValue);
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
-
         glm::mat4 view;
         glm::mat4 projection;
-        view = glm::translate(view, glm::vec3(0.0, 0.0, -3.0f));
+        view = glm::translate(view, glm::vec3(0.0, -1.0, -10.0f));
         projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH  / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
         shaderProgram.setMatrix4fv("view", view);
@@ -236,7 +236,11 @@ int createHelloTriangleWindow()
         for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(glm::vec3); i += 1) {
             glm::mat4 model;
             model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, (float)glfwGetTime() * glm::radians(20.0f * i + 20.0f), glm::vec3(1.5, 0.3, 0.5));
+            float angle = i == 0 ? 1 : glm::radians(20.0f * i);
+            if (i % 3 == 0) {
+                angle = (float)glfwGetTime() * angle;
+            }
+            model = glm::rotate(model, angle, glm::vec3(1.5, 0.3, 0.5));
             shaderProgram.setMatrix4fv("model", model);
             // 画矩形
             glDrawArrays(GL_TRIANGLES, 0, 36);
