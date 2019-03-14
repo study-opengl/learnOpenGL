@@ -233,10 +233,10 @@ int createHelloTriangleWindow()
             diffTime = expectedFrameTime - deltaTime;
             usleep(diffTime * 1000000);
             deltaTime += diffTime;
-            asLog("sleep:%f", diffTime);
+//            asLog("sleep:%f", diffTime);
         }
         lastFrame = currentFrame;
-        asLog("deltaTime:%f", deltaTime);
+//        asLog("deltaTime:%f", deltaTime);
 
         progressInput(window);
 
