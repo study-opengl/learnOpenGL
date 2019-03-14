@@ -19,6 +19,8 @@
 int createHelloTriangleWindow();
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
 void progressInput(GLFWwindow *window);
+void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
+void mouseScrollCallback(GLFWwindow *window, double xpos, double ypos);
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -30,6 +32,11 @@ float mixValue = 0.2f;
 glm::vec3 cameraPos = glm::vec3(0, 0, 3);
 glm::vec3 cameraFront = glm::vec3(0, 0, -1);
 glm::vec3 cameraUp = glm::vec3(0, 1, 0);
+
+/*
+ 作为我们摄像机系统的一个附加内容，我们还会来实现一个缩放(Zoom)接口。在之前的教程中我们说视野(Field of View)或fov定义了我们可以看到场景中多大的范围。当视野变小时，场景投影出来的空间就会减小，产生放大(Zoom In)了的感觉。我们会使用鼠标的滚轮来放大。
+ */
+float fov = 45.0f;
 
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
@@ -116,6 +123,9 @@ int createHelloTriangleWindow()
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, frameBufferSizeCallback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPosCallback(window, mousePositionCallback);
+    glfwSetScrollCallback(window, mouseScrollCallback);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         asLog("failed to initialize glad");
         glfwTerminate();
@@ -259,7 +269,7 @@ int createHelloTriangleWindow()
         view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
         // 投影矩阵
-        projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH  / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH  / (float)SCR_HEIGHT, 0.1f, 100.0f);
 
         shaderProgram.setMatrix4fv("view", view);
         shaderProgram.setMatrix4fv("projection", projection);
@@ -314,5 +324,57 @@ void progressInput(GLFWwindow *window)
         cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
     } else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
         cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    }
+}
+
+float lastXpos = SCR_WIDTH / 2;
+float lastYpos = SCR_HEIGHT / 2;
+bool firstMouse = true;
+float sensitivity = 0.05f;
+// 俯仰角
+float pitch = 0.0f;
+// 偏航角
+float yaw = -90.0f; // 初始化成pitch =0, yaw = -90 相当于 camerafront = (0, 0, -1)
+void mousePositionCallback(GLFWwindow *window, double xpos, double ypos) {
+    if (firstMouse) {
+        lastXpos = xpos;
+        lastYpos = ypos;
+        firstMouse = false;
+    }
+    asLog("xpos: %f, y: %f", xpos, ypos);
+    float offsetX = xpos - lastXpos;
+    float offsetY = lastYpos - ypos;
+    asLog("offsetX: %f, offsetY: %f", offsetX, offsetY);
+    lastXpos = xpos;
+    lastYpos = ypos;
+    
+    offsetX *= sensitivity;
+    offsetY *= sensitivity;
+    pitch += offsetY;
+    yaw += offsetX;
+    if (pitch > 89.0f) {
+        pitch = 89.0f;
+    }
+    if (pitch < -89.0f) {
+        pitch = -89.0f;
+    }
+    
+    glm::vec3 front;
+    front.y = sin(glm::radians(pitch));
+    front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
+    front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
+    cameraFront = glm::normalize(front);
+}
+
+void mouseScrollCallback(GLFWwindow *window, double xpos, double ypos) {
+    asLog("xpos: %f, ypos: %f", xpos, ypos);
+    if (fov >= 1.0f && fov <= 45.0f) {
+        fov -= ypos;
+    }
+    if (fov < 1.0f) {
+        fov = 1.0f;
+    }
+    if (fov > 45.0f) {
+        fov = 45.0f;
     }
 }
