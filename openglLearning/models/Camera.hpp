@@ -51,7 +51,7 @@ public:
         worldUp = up;
         yaw = newYaw;
         pitch = newPitch;
-        
+
         updateCameraData();
     }
 
@@ -74,9 +74,11 @@ public:
             default:
                 break;
         }
+//        cameraPos.y = 0.0f;
     }
-    
-    void progressMouseMove(float offsetX, float offsetY, bool constrainPitch = true) {
+
+    void progressMouseMove(float offsetX, float offsetY, bool constrainPitch = true)
+    {
         yaw += offsetX * mouseSensitivity;
         pitch += offsetY * mouseSensitivity;
         if (constrainPitch) {
@@ -89,8 +91,9 @@ public:
         }
         updateCameraData();
     }
-    
-    void progressScroll(float yOffset) {
+
+    void progressScroll(float yOffset)
+    {
         if (zoom >= 1.0f && zoom <= 45.0f) {
             zoom -= yOffset;
         }
@@ -104,19 +107,48 @@ public:
 
     glm::mat4 viewMatrix()
     {
+//        return calculateLookAtMatrix(cameraPos, cameraPos + cameraFront, up);
         return glm::lookAt(cameraPos, cameraPos + cameraFront, up);
     }
-    
+
 private:
-    void updateCameraData() {
+    void updateCameraData()
+    {
         glm::vec3 front;
         front.x = cos(glm::radians(pitch)) * cos(glm::radians(yaw));
         front.y = sin(glm::radians(pitch));
         front.z = cos(glm::radians(pitch)) * sin(glm::radians(yaw));
         cameraFront = glm::normalize(front);
-        
+
         right = glm::normalize(glm::cross(front, worldUp));
         up = glm::normalize(glm::cross(right, front));
+    }
+
+    /**
+     自己计算 look at 矩阵
+     */
+    glm::mat4 calculateLookAtMatrix(glm::vec3 position, glm::vec3 target, glm::vec3 worldUp)
+    {
+        glm::vec3 front = glm::normalize(position - target);
+        glm::vec3 right = glm::normalize(glm::cross(glm::normalize(worldUp), front));
+        glm::vec3 up = glm::normalize(glm::cross(right, front));
+
+        glm::mat4 translate;
+        translate[3][0] = -position.x;
+        translate[3][1] = -position.y;
+        translate[3][2] = -position.z;
+        glm::mat4 rotate;
+        rotate[0][0] = right.x;
+        rotate[1][0] = right.y;
+        rotate[2][0] = right.z;
+        rotate[0][1] = up.x;
+        rotate[1][1] = up.y;
+        rotate[2][1] = up.z;
+        rotate[0][2] = front.x;
+        rotate[1][2] = front.y;
+        rotate[2][2] = front.z;
+
+        return rotate * translate;
     }
 };
 
