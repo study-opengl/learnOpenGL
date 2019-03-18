@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F91ACD792237ED4100391BD0 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
+		F91ACDE4223B858100391BD0 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
 		F95BF9212095BEDD00B52272 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
 		F95BF92F2095C40A00B52272 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF92E2095C40A00B52272 /* main.cpp */; };
 		F95BF9332095C64D00B52272 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
@@ -187,6 +188,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F91ACDE0223B68E000391BD0 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		F91ACDE2223B851900391BD0 /* main.old.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.old.cpp; sourceTree = "<group>"; };
 		F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		F95BF91F2095B18D00B52272 /* ShaderProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderProgram.hpp; sourceTree = "<group>"; };
 		F95BF9252095C29600B52272 /* timing.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = timing.vs; sourceTree = "<group>"; };
@@ -306,6 +309,7 @@
 			children = (
 				F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */,
 				F95BF91F2095B18D00B52272 /* ShaderProgram.hpp */,
+				F91ACDE0223B68E000391BD0 /* Camera.hpp */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -547,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				F9C1D974223943B0002D7006 /* main.cpp */,
+				F91ACDE2223B851900391BD0 /* main.old.cpp */,
 			);
 			path = camera;
 			sourceTree = "<group>";
@@ -832,6 +837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91ACDE4223B858100391BD0 /* Camera.hpp in Sources */,
 				F9C1D97C223943DF002D7006 /* glad.c in Sources */,
 				F9C1D979223943D8002D7006 /* ShaderProgram.cpp in Sources */,
 				F9C1D97A223943D8002D7006 /* stb_image.cpp in Sources */,
