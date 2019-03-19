@@ -6,5 +6,9 @@ uniform vec3 lightColor;
 out vec4 FragColor;
 
 void main() {
-    FragColor = vec4(lightColor * cubeColor, 1.0f);
+    // 环境关照强度
+    float ambientStrength = 0.1f;
+    vec3 ambient = ambientStrength * lightColor;
+    vec3 color = ambient * cubeColor;
+    FragColor = vec4(color, 1.0f);
 }
