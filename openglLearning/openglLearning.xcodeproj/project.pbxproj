@@ -81,6 +81,8 @@
 		F9CBA5D3223FFD180094A752 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF9462096F26000B52272 /* stb_image.cpp */; };
 		F9CBA5D4223FFD220094A752 /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
 		F9CBA5D5223FFD530094A752 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
+		F9D0A0FE224082C30062A0B2 /* cube.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FD22407FA00062A0B2 /* cube.fs */; };
+		F9D0A0FF224082C80062A0B2 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -186,6 +188,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F9D0A0FF224082C80062A0B2 /* lamp.fs in CopyFiles */,
+				F9D0A0FE224082C30062A0B2 /* cube.fs in CopyFiles */,
 				F9CBA5D0223FFA4F0094A752 /* cube.vs in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +242,8 @@
 		F9CBA5C7223FF9C10094A752 /* light */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = light; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9CBA5C9223FF9C10094A752 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9CBA5CF223FFA170094A752 /* cube.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.vs; sourceTree = "<group>"; };
+		F9D0A0FC22407AC40062A0B2 /* lamp.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = lamp.fs; sourceTree = "<group>"; };
+		F9D0A0FD22407FA00062A0B2 /* cube.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = cube.fs; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,6 +357,8 @@
 				F9AEB6E2209CD5CA00163CD0 /* transform.fs */,
 				F9695A972237EB8F001E6436 /* coordinate.fs */,
 				F9C1D97D22394401002D7006 /* camera.fs */,
+				F9D0A0FC22407AC40062A0B2 /* lamp.fs */,
+				F9D0A0FD22407FA00062A0B2 /* cube.fs */,
 			);
 			path = fragment;
 			sourceTree = "<group>";
