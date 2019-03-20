@@ -28,47 +28,47 @@ Camera camera = Camera(glm::vec3(0.5f, 0.5f, 5.0f));
 float deltaTime = 0.0f;
 
 float vertices[] = {
-    -0.5f, -0.5f, -0.5f,
-    0.5f, -0.5f, -0.5f,
-    0.5f, 0.5f, -0.5f,
-    0.5f, 0.5f, -0.5f,
-    -0.5f, 0.5f, -0.5f,
-    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
 
-    -0.5f, -0.5f, 0.5f,
-    0.5f, -0.5f, 0.5f,
-    0.5f, 0.5f, 0.5f,
-    0.5f, 0.5f, 0.5f,
-    -0.5f, 0.5f, 0.5f,
-    -0.5f, -0.5f, 0.5f,
+    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
 
-    -0.5f, 0.5f, 0.5f,
-    -0.5f, 0.5f, -0.5f,
-    -0.5f, -0.5f, -0.5f,
-    -0.5f, -0.5f, -0.5f,
-    -0.5f, -0.5f, 0.5f,
-    -0.5f, 0.5f, 0.5f,
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
 
-    0.5f, 0.5f, 0.5f,
-    0.5f, 0.5f, -0.5f,
-    0.5f, -0.5f, -0.5f,
-    0.5f, -0.5f, -0.5f,
-    0.5f, -0.5f, 0.5f,
-    0.5f, 0.5f, 0.5f,
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
 
-    -0.5f, -0.5f, -0.5f,
-    0.5f, -0.5f, -0.5f,
-    0.5f, -0.5f, 0.5f,
-    0.5f, -0.5f, 0.5f,
-    -0.5f, -0.5f, 0.5f,
-    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
+    0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
 
-    -0.5f, 0.5f, -0.5f,
-    0.5f, 0.5f, -0.5f,
-    0.5f, 0.5f, 0.5f,
-    0.5f, 0.5f, 0.5f,
-    -0.5f, 0.5f, 0.5f,
-    -0.5f, 0.5f, -0.5f};
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f};
 
 int createWindow()
 {
@@ -152,7 +152,7 @@ void setupWindow()
     glfwSetScrollCallback(window, scrollCallback);
 }
 
-unsigned int generateVAO(float *vertices, unsigned int length)
+unsigned int genLampVAO(float *vertices, unsigned int length)
 {
     unsigned int vao;
     glGenVertexArrays(1, &vao);
@@ -163,8 +163,30 @@ unsigned int generateVAO(float *vertices, unsigned int length)
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, length * sizeof(float), vertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    glDeleteBuffers(1, &vbo);
+    return vao;
+}
+
+unsigned int genCubeVAO(float *vertices, unsigned int length)
+{
+    unsigned int vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    unsigned int vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, length * sizeof(float), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -181,6 +203,7 @@ int initOpenGL()
     }
     return 1;
 }
+glm::vec3 lampPos(1.2f, 1.0f, 2.0f);
 void drawLamp(ShaderProgram &lampShader, unsigned int vao)
 {
     lampShader.use();
@@ -204,7 +227,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     glm::vec3 cubPos(0.0f, 0.0f, 0.0f);
     glm::mat4 model = glm::mat4();
     model = glm::translate(model, cubPos);
-    model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5, 0.3, 0.5));
+//    model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5, 0.3, 0.5));
     glm::mat4 view = camera.viewMatrix();
     glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
     cubeShader.setMatrix4fv("model", model);
@@ -212,6 +235,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setMatrix4fv("projection", projection);
     cubeShader.setVec3("cubeColor", 1.0f, 0.5f, 0.31f);
     cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+    cubeShader.setVec3("lampPos", lampPos.x, lampPos.y, lampPos.z);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
@@ -219,8 +243,8 @@ void draw()
 {
     ShaderProgram cubeShader = ShaderProgram("cube.vs", "cube.fs");
     ShaderProgram lampShader = ShaderProgram("cube.vs", "lamp.fs");
-    unsigned int lampVAO = generateVAO(vertices, sizeof(vertices) / sizeof(float));
-    unsigned int cubeVAO = generateVAO(vertices, sizeof(vertices) / sizeof(float));
+    unsigned int lampVAO = genLampVAO(vertices, sizeof(vertices) / sizeof(float));
+    unsigned int cubeVAO = genCubeVAO(vertices, sizeof(vertices) / sizeof(float));
     float fps = FPS;
     float expectedFrameTime = 1.0f / fps;
     float lastFrameTime = 0.0f;
