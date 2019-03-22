@@ -13,7 +13,8 @@
 #include "gtc/matrix_transform.hpp"
 #include "gtc/type_ptr.hpp"
 
-enum CameraMovement {
+enum CameraMovement
+{
     FORWARD,
     BACKWARD,
     LEFT,
@@ -26,8 +27,8 @@ const float SPEED = 2.5f;
 const float SENSITIVITY = 0.05f;
 const float ZOOM = 45.0f;
 
-class Camera {
-    glm::vec3 cameraPos;
+class Camera
+{
     glm::vec3 cameraFront;
     glm::vec3 worldUp;
     // 右轴
@@ -35,7 +36,8 @@ class Camera {
     // 上轴
     glm::vec3 up;
 
-public:
+  public:
+    glm::vec3 cameraPos;
     // 欧拉角
     float yaw;
     float pitch;
@@ -46,7 +48,8 @@ public:
     // 鼠标灵敏度
     float mouseSensitivity;
 
-    Camera(glm::vec3 pos, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float newYaw = YAW, float newPitch = PITCH) : cameraFront(glm::vec3(0.0f, 0.0f, -1.0f)), speed(SPEED), mouseSensitivity(SENSITIVITY), zoom(ZOOM) {
+    Camera(glm::vec3 pos, glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float newYaw = YAW, float newPitch = PITCH) : cameraFront(glm::vec3(0.0f, 0.0f, -1.0f)), speed(SPEED), mouseSensitivity(SENSITIVITY), zoom(ZOOM)
+    {
         cameraPos = pos;
         worldUp = up;
         yaw = newYaw;
@@ -58,34 +61,38 @@ public:
     void progressKeyboard(CameraMovement direction, float deltatime)
     {
         float velocity = speed * deltatime;
-        switch (direction) {
-            case FORWARD:
-                cameraPos += velocity * cameraFront;
-                break;
-            case BACKWARD:
-                cameraPos -= velocity * cameraFront;
-                break;
-            case LEFT:
-                cameraPos -= velocity * right;
-                break;
-            case RIGHT:
-                cameraPos += velocity * right;
-                break;
-            default:
-                break;
+        switch (direction)
+        {
+        case FORWARD:
+            cameraPos += velocity * cameraFront;
+            break;
+        case BACKWARD:
+            cameraPos -= velocity * cameraFront;
+            break;
+        case LEFT:
+            cameraPos -= velocity * right;
+            break;
+        case RIGHT:
+            cameraPos += velocity * right;
+            break;
+        default:
+            break;
         }
-//        cameraPos.y = 0.0f;
+        //        cameraPos.y = 0.0f;
     }
 
     void progressMouseMove(float offsetX, float offsetY, bool constrainPitch = true)
     {
         yaw += offsetX * mouseSensitivity;
         pitch += offsetY * mouseSensitivity;
-        if (constrainPitch) {
-            if (pitch > 89.0f) {
+        if (constrainPitch)
+        {
+            if (pitch > 89.0f)
+            {
                 pitch = 89.0f;
             }
-            if (pitch < -89.0f) {
+            if (pitch < -89.0f)
+            {
                 pitch = -89.0f;
             }
         }
@@ -94,24 +101,27 @@ public:
 
     void progressScroll(float yOffset)
     {
-        if (zoom >= 1.0f && zoom <= 45.0f) {
+        if (zoom >= 1.0f && zoom <= 45.0f)
+        {
             zoom -= yOffset;
         }
-        if (zoom < 1.0f) {
+        if (zoom < 1.0f)
+        {
             zoom = 1.0f;
         }
-        if (zoom > 45.0f) {
+        if (zoom > 45.0f)
+        {
             zoom = 45.0f;
         }
     }
 
     glm::mat4 viewMatrix()
     {
-//        return calculateLookAtMatrix(cameraPos, cameraPos + cameraFront, up);
+        //        return calculateLookAtMatrix(cameraPos, cameraPos + cameraFront, up);
         return glm::lookAt(cameraPos, cameraPos + cameraFront, up);
     }
 
-private:
+  private:
     void updateCameraData()
     {
         glm::vec3 front;

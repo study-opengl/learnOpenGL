@@ -227,7 +227,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     glm::vec3 cubPos(0.0f, 0.0f, 0.0f);
     glm::mat4 model = glm::mat4();
     model = glm::translate(model, cubPos);
-//    model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5, 0.3, 0.5));
+    //    model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1.5, 0.3, 0.5));
     glm::mat4 view = camera.viewMatrix();
     glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
     cubeShader.setMatrix4fv("model", model);
@@ -236,6 +236,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("cubeColor", 1.0f, 0.5f, 0.31f);
     cubeShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
     cubeShader.setVec3("lampPos", lampPos.x, lampPos.y, lampPos.z);
+    cubeShader.setVec3("viewPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
