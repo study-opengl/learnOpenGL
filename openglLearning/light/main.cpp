@@ -208,7 +208,8 @@ void drawLamp(ShaderProgram &lampShader, unsigned int vao)
 {
     lampShader.use();
     glBindVertexArray(vao);
-    glm::vec3 lampPos(1.2f, 1.0f, 2.0f);
+    lampPos.x = sqrtf(1.2 * 1.2 + 2.0 * 2.0) * cosf((float)glfwGetTime());
+    lampPos.z = sqrtf(1.2 * 1.2 + 2.0 * 2.0) * sinf((float)glfwGetTime());
     glm::mat4 model = glm::mat4();
     model = glm::translate(model, lampPos);
     model = glm::scale(model, glm::vec3(0.2f));
