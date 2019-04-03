@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <math.h>
 #include "stb_image.h"
+#include "glad.h"
 
 int createHelloTriangleWindow();
 void frameBufferSizeCallback(GLFWwindow* window, int width, int height);
