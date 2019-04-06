@@ -226,6 +226,7 @@ void drawLamp(ShaderProgram &lampShader, unsigned int vao)
 
 unsigned int diffuseMap = 0;
 unsigned int specularMap = 0;
+unsigned int emissionMap = 0;
 void drawCube(ShaderProgram &cubeShader, unsigned int vao)
 {
     cubeShader.use();
@@ -245,7 +246,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("viewPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
     // cubeShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
     // cubeShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-    cubeShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+    // cubeShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
     cubeShader.setFloat("material.shininess", 32.0f);
     cubeShader.setInt("material.diffuse", 0);
     glActiveTexture(GL_TEXTURE0);
@@ -253,6 +254,10 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setInt("material.specular", 1);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, specularMap);
+    cubeShader.setInt("material.emission", 2);
+    glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, emissionMap);
+
     glm::vec3 lightColor = glm::vec3(1);
     // lightColor.x = sin(glfwGetTime() * 2.0f);
     // lightColor.y = sin(glfwGetTime() * 0.7f);
@@ -273,6 +278,7 @@ void draw()
     unsigned int cubeVAO = genCubeVAO(vertices, sizeof(vertices) / sizeof(float));
     diffuseMap = textureGenarate("container2.png");
     specularMap = textureGenarate("container2_specular.png");
+    emissionMap = textureGenarate("matrix.jpg");
     float fps = FPS;
     float expectedFrameTime = 1.0f / fps;
     float lastFrameTime = 0.0f;

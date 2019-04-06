@@ -58,6 +58,7 @@
 		F964D4B32254FB4800580BB9 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F964D4B9225507C400580BB9 /* container2.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F964D4B82255058600580BB9 /* container2.png */; };
 		F964D4BB22550DAD00580BB9 /* container2_specular.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F964D4BA22550DA400580BB9 /* container2_specular.png */; };
+		F964D508225882EF00580BB9 /* matrix.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F964D507225882E700580BB9 /* matrix.jpg */; };
 		F9695A3D22341142001E6436 /* asLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C435720922B9100D83128 /* asLog.cpp */; };
 		F9695A912237EA9E001E6436 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9695A902237EA9E001E6436 /* main.cpp */; };
 		F9695A982237EBAD001E6436 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
@@ -166,6 +167,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F964D508225882EF00580BB9 /* matrix.jpg in CopyFiles */,
 				F964D4BB22550DAD00580BB9 /* container2_specular.png in CopyFiles */,
 				F964D4B9225507C400580BB9 /* container2.png in CopyFiles */,
 				F964D4B12254FB0F00580BB9 /* lightMaps.fs in CopyFiles */,
@@ -275,6 +277,7 @@
 		F964D4B6225500FB00580BB9 /* openGlHelper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = openGlHelper.hpp; sourceTree = "<group>"; };
 		F964D4B82255058600580BB9 /* container2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = container2.png; sourceTree = "<group>"; };
 		F964D4BA22550DA400580BB9 /* container2_specular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = container2_specular.png; sourceTree = "<group>"; };
+		F964D507225882E700580BB9 /* matrix.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = matrix.jpg; sourceTree = "<group>"; };
 		F9695A8E2237EA9E001E6436 /* coordinate-system */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "coordinate-system"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9695A902237EA9E001E6436 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9695A962237EB5E001E6436 /* coordinate.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = coordinate.vs; sourceTree = "<group>"; };
@@ -486,6 +489,7 @@
 		F95BF9722096F55A00B52272 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F964D507225882E700580BB9 /* matrix.jpg */,
 				F964D4BA22550DA400580BB9 /* container2_specular.png */,
 				F964D4B82255058600580BB9 /* container2.png */,
 				F95BF97F20970CC100B52272 /* awesomeface.png */,
