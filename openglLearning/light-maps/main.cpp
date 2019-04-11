@@ -227,6 +227,18 @@ void drawLamp(ShaderProgram &lampShader, unsigned int vao)
 unsigned int diffuseMap = 0;
 unsigned int specularMap = 0;
 unsigned int emissionMap = 0;
+glm::vec3 cubePositions[] = {
+    glm::vec3( 0.0f,  0.0f,  0.0f),
+    glm::vec3( 2.0f,  5.0f, -15.0f),
+    glm::vec3(-1.5f, -2.2f, -2.5f),
+    glm::vec3(-3.8f, -2.0f, -12.3f),
+    glm::vec3( 2.4f, -0.4f, -3.5f),
+    glm::vec3(-1.7f,  3.0f, -7.5f),
+    glm::vec3( 1.3f, -2.0f, -2.5f),
+    glm::vec3( 1.5f,  2.0f, -2.5f),
+    glm::vec3( 1.5f,  0.2f, -1.5f),
+    glm::vec3(-1.3f,  1.0f, -1.5f)
+};
 void drawCube(ShaderProgram &cubeShader, unsigned int vao)
 {
     cubeShader.use();
@@ -267,7 +279,19 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("light.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
     cubeShader.setVec3("light.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
     cubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    cubeShader.setFloat("light.constant", 1.0f);
+    cubeShader.setFloat("light.linear", 0.09f);
+    cubeShader.setFloat("light.quadratic", 0.032f);
+    for (int i = 0; i < 10; i += 1) {
+        glm::vec3 cubPos = cubePositions[i];
+        glm::mat4 model = glm::mat4();
+        model = glm::translate(model, cubPos);
+        float angel = 20.0f * i;
+        model = glm::rotate(model, glm::radians(angel), glm::vec3(1.0f, 0.3f, 0.5f));
+        cubeShader.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
+//    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 void draw()

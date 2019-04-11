@@ -15,6 +15,10 @@ struct Light {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+    
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 uniform vec3 cubeColor;
@@ -51,8 +55,10 @@ void main() {
     // 放射光贴图(Emission Map)
     vec3 emission = texture(material.emission, TexCoords).rgb;
 
-
-    vec3 color = ambient + diffuse + specular + emission;
+    // 实现衰减
+    float distance = length(LampPos - FragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * distance * distance);
+    vec3 color = (ambient + diffuse + specular) * attenuation + emission;
     FragColor = vec4(color, 1.0f);
 }
 
