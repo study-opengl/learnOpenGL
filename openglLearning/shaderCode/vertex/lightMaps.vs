@@ -17,7 +17,7 @@ out vec2 TexCoords;
 void main() {
     gl_Position = projection * view * model * vec4(position, 1.0f);
     // 将 position 转到 观察空间
-    FragPos = vec3(view * model * vec4(position, 1.0f));
+    FragPos = vec3(model * vec4(position, 1.0f));
     //    Normal = normal;
     // mat3(transpose(inverse(model))) 法线矩阵 将法向量转移到世界空间
     // mat3(transpose(inverse(view * model))) 法线矩阵 将法向量转移到世界空间

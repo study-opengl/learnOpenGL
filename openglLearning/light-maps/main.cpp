@@ -274,7 +274,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     // lightColor.x = sin(glfwGetTime() * 2.0f);
     // lightColor.y = sin(glfwGetTime() * 0.7f);
     // lightColor.z = sin(glfwGetTime() * 1.3f);
-    glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f);
+    glm::vec3 diffuseColor = lightColor * glm::vec3(0.8f);
     glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
     cubeShader.setVec3("light.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
     cubeShader.setVec3("light.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
@@ -282,6 +282,9 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setFloat("light.constant", 1.0f);
     cubeShader.setFloat("light.linear", 0.09f);
     cubeShader.setFloat("light.quadratic", 0.032f);
+    cubeShader.setVec3("light.position", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
+    cubeShader.setVec3("light.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
+    cubeShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
     for (int i = 0; i < 10; i += 1) {
         glm::vec3 cubPos = cubePositions[i];
         glm::mat4 model = glm::mat4();

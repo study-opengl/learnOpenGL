@@ -29,7 +29,6 @@ const float ZOOM = 45.0f;
 
 class Camera
 {
-    glm::vec3 cameraFront;
     glm::vec3 worldUp;
     // 右轴
     glm::vec3 right;
@@ -38,6 +37,7 @@ class Camera
 
   public:
     glm::vec3 cameraPos;
+    glm::vec3 cameraFront;
     // 欧拉角
     float yaw;
     float pitch;
