@@ -13,7 +13,8 @@ struct Material {
 struct Light {
     vec3 position;
     vec3 direction; // 聚光所指向的方向
-    float cutOff; // 切光角余弦值
+    float cutOff; // 内切光角余弦值
+    float outterCutOff; // 外切光角余弦值
 
     vec3 ambient;
     vec3 diffuse;
@@ -41,33 +42,31 @@ void main()
 {
     vec3 lightDir = normalize(light.position - FragPos);
     float theta = dot(lightDir, normalize(-light.direction));
+    float epsilon = light.cutOff - light.outterCutOff;
+    float intensity = clamp((theta - light.outterCutOff) / epsilon, 0, 1.0);
 
-    if (theta > light.cutOff) {
-        // 环境关照强度
-        float ambientStrength = 0.1f;
-        vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
-        // 计算漫反射光照
-        vec3 normal = normalize(Normal);
-        float diff = max(dot(lightDir, normal), 0.0);
-        vec3 diffuse = diff * light.diffuse * texture(material.diffuse, TexCoords).rgb;
-        // 计算镜面光照
-        vec3 viewDir = normalize(viewPos - FragPos);
-        vec3 reflectDir = reflect(-lightDir, normal);
-        // 镜面强度
-        float specularStrength = 0.5;
-        // 镜面分量计算 32是高光的反光度
-        float spec = pow(max(dot(viewDir, reflectDir), 0), material.shininess);
-        vec3 specular = spec * light.specular * texture(material.specular, TexCoords).rgb;
+    // 环境关照强度
+    float ambientStrength = 0.1f;
+    vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
+    // 计算漫反射光照
+    vec3 normal = normalize(Normal);
+    float diff = max(dot(lightDir, normal), 0.0);
+    vec3 diffuse = diff * light.diffuse * texture(material.diffuse, TexCoords).rgb;
+    // 计算镜面光照
+    vec3 viewDir = normalize(viewPos - FragPos);
+    vec3 reflectDir = reflect(-lightDir, normal);
+    // 镜面强度
+    float specularStrength = 0.5;
+    // 镜面分量计算 32是高光的反光度
+    float spec = pow(max(dot(viewDir, reflectDir), 0), material.shininess);
+    vec3 specular = spec * light.specular * texture(material.specular, TexCoords).rgb;
 
-        // 放射光贴图(Emission Map)
-        vec3 emission = texture(material.emission, TexCoords).rgb;
+    // 放射光贴图(Emission Map)
+    vec3 emission = texture(material.emission, TexCoords).rgb;
 
-        // 实现衰减
-        float distance = length(light.position - FragPos);
-        float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * distance * distance);
-        vec3 color = ambient + (diffuse + specular) * attenuation + emission;
-        FragColor = vec4(color, 1.0f);
-    } else {
-        FragColor = vec4(light.ambient * texture(material.diffuse, TexCoords).rgb, 1.0f);
-    }
+    // 实现衰减
+    float distance = length(light.position - FragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * distance * distance);
+    vec3 color = ambient + (diffuse + specular) * attenuation * intensity + emission * intensity;
+    FragColor = vec4(color, 1.0f);
 }

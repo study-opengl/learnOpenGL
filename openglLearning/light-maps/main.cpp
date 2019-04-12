@@ -285,6 +285,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("light.position", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
     cubeShader.setVec3("light.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
     cubeShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+    cubeShader.setFloat("light.outterCutOff", glm::cos(glm::radians(17.5f)));
     for (int i = 0; i < 10; i += 1) {
         glm::vec3 cubPos = cubePositions[i];
         glm::mat4 model = glm::mat4();
