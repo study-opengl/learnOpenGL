@@ -73,6 +73,7 @@
 		F964D5AE225BA77800580BB9 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
 		F964D5AF225BA77E00580BB9 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F964D5B0225BA7D800580BB9 /* matrix.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F964D507225882E700580BB9 /* matrix.jpg */; };
+		F964D6222260951200580BB9 /* lamp.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F964D6212260950D00580BB9 /* lamp.vs */; };
 		F9695A3D22341142001E6436 /* asLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C435720922B9100D83128 /* asLog.cpp */; };
 		F9695A912237EA9E001E6436 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9695A902237EA9E001E6436 /* main.cpp */; };
 		F9695A982237EBAD001E6436 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
@@ -181,6 +182,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F964D6222260951200580BB9 /* lamp.vs in CopyFiles */,
 				F964D508225882EF00580BB9 /* matrix.jpg in CopyFiles */,
 				F964D4BB22550DAD00580BB9 /* container2_specular.png in CopyFiles */,
 				F964D4B9225507C400580BB9 /* container2.png in CopyFiles */,
@@ -312,6 +314,7 @@
 		F964D587225BA2B900580BB9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F964D5AA225BA61800580BB9 /* caster_direction.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = caster_direction.vs; sourceTree = "<group>"; };
 		F964D5AB225BA70A00580BB9 /* caster_direction.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = caster_direction.fs; sourceTree = "<group>"; };
+		F964D6212260950D00580BB9 /* lamp.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = lamp.vs; sourceTree = "<group>"; };
 		F9695A8E2237EA9E001E6436 /* coordinate-system */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "coordinate-system"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9695A902237EA9E001E6436 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F9695A962237EB5E001E6436 /* coordinate.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = coordinate.vs; sourceTree = "<group>"; };
@@ -466,6 +469,7 @@
 		F95BF9232095C17E00B52272 /* vertex */ = {
 			isa = PBXGroup;
 			children = (
+				F964D6212260950D00580BB9 /* lamp.vs */,
 				F95BF9252095C29600B52272 /* timing.vs */,
 				F95BF9402095D17D00B52272 /* vertexWithColor.vs */,
 				F95BF97B2096FFBE00B52272 /* texture.vs */,

@@ -6,6 +6,8 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include "ShaderProgram.hpp"
 #include "glfw3.h"
 #include "asLog.h"
@@ -207,38 +209,44 @@ int initOpenGL()
     return 1;
 }
 glm::vec3 lampPos(1.2f, 1.0f, 2.0f);
+glm::vec3 pointLightPositions[] = {
+    glm::vec3(0.7f, 0.2f, 2.0f),
+    glm::vec3(2.3f, -3.3f, -4.0f),
+    glm::vec3(-4.0f, 2.0f, -12.0f),
+    glm::vec3(0.0f, 0.0f, -3.0f)};
 void drawLamp(ShaderProgram &lampShader, unsigned int vao)
 {
     lampShader.use();
     glBindVertexArray(vao);
-    lampPos.x = sqrtf(1.2 * 1.2 + 2.0 * 2.0) * cosf((float)glfwGetTime());
-    lampPos.z = sqrtf(1.2 * 1.2 + 2.0 * 2.0) * sinf((float)glfwGetTime());
-    glm::mat4 model = glm::mat4();
-    model = glm::translate(model, lampPos);
-    model = glm::scale(model, glm::vec3(0.2f));
     glm::mat4 view = camera.viewMatrix();
     glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
-    lampShader.setMatrix4fv("model", model);
     lampShader.setMatrix4fv("view", view);
     lampShader.setMatrix4fv("projection", projection);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    for (int i = 0; i < 4; i++)
+    {
+        glm::vec3 position = pointLightPositions[i];
+        glm::mat4 model = glm::mat4();
+        model = glm::translate(model, position);
+        model = glm::scale(model, glm::vec3(0.2f));
+        lampShader.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
 }
 
 unsigned int diffuseMap = 0;
 unsigned int specularMap = 0;
 unsigned int emissionMap = 0;
 glm::vec3 cubePositions[] = {
-    glm::vec3( 0.0f,  0.0f,  0.0f),
-    glm::vec3( 2.0f,  5.0f, -15.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(2.0f, 5.0f, -15.0f),
     glm::vec3(-1.5f, -2.2f, -2.5f),
     glm::vec3(-3.8f, -2.0f, -12.3f),
-    glm::vec3( 2.4f, -0.4f, -3.5f),
-    glm::vec3(-1.7f,  3.0f, -7.5f),
-    glm::vec3( 1.3f, -2.0f, -2.5f),
-    glm::vec3( 1.5f,  2.0f, -2.5f),
-    glm::vec3( 1.5f,  0.2f, -1.5f),
-    glm::vec3(-1.3f,  1.0f, -1.5f)
-};
+    glm::vec3(2.4f, -0.4f, -3.5f),
+    glm::vec3(-1.7f, 3.0f, -7.5f),
+    glm::vec3(1.3f, -2.0f, -2.5f),
+    glm::vec3(1.5f, 2.0f, -2.5f),
+    glm::vec3(1.5f, 0.2f, -1.5f),
+    glm::vec3(-1.3f, 1.0f, -1.5f)};
 void drawCube(ShaderProgram &cubeShader, unsigned int vao)
 {
     cubeShader.use();
@@ -275,7 +283,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     // lightColor.y = sin(glfwGetTime() * 0.7f);
     // lightColor.z = sin(glfwGetTime() * 1.3f);
     glm::vec3 diffuseColor = lightColor * glm::vec3(0.8f);
-    glm::vec3 ambientColor = diffuseColor * glm::vec3(0.2f);
+    glm::vec3 ambientColor = diffuseColor * glm::vec3(0.05f);
     cubeShader.setVec3("light.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
     cubeShader.setVec3("light.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
     cubeShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
@@ -286,7 +294,41 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("light.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
     cubeShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
     cubeShader.setFloat("light.outterCutOff", glm::cos(glm::radians(17.5f)));
-    for (int i = 0; i < 10; i += 1) {
+
+    // 定向光
+    cubeShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
+    cubeShader.setVec3("dirLight.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
+    cubeShader.setVec3("dirLight.diffuse", diffuseColor.x / 2, diffuseColor.y / 2, diffuseColor.z / 2);
+    cubeShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
+
+    // 4 个点光源
+    for (int i = 0; i < 4; i++)
+    {
+        glm::vec3 position = pointLightPositions[i];
+        std::string prefix = std::string("pointLights[") + std::to_string(i) + std::string("].");
+        cubeShader.setVec3(prefix + std::string("position"), position.x, position.y, position.z);
+        cubeShader.setVec3(prefix + std::string("ambient"), ambientColor.x, ambientColor.y, ambientColor.z);
+        cubeShader.setVec3(prefix + std::string("diffuse"), diffuseColor.x, diffuseColor.y, diffuseColor.z);
+        cubeShader.setVec3(prefix + std::string("specular"), 1.0f, 1.0f, 1.0f);
+        cubeShader.setFloat(prefix + std::string("constant"), 1.0f);
+        cubeShader.setFloat(prefix + std::string("linear"), 0.09f);
+        cubeShader.setFloat(prefix + std::string("quadratic"), 0.032f);
+    }
+
+    // 聚光
+    cubeShader.setVec3("spotLight.position", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
+    cubeShader.setVec3("spotLight.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
+    cubeShader.setFloat("spotLight.cutOff", glm::cos(glm::radians(12.5f)));
+    cubeShader.setFloat("spotLight.outterCutOff", glm::cos(glm::radians(17.5f)));
+    cubeShader.setVec3("spotLight.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
+    cubeShader.setVec3("spotLisht.diffuse", diffuseColor.x, diffuseColor.y, diffuseColor.z);
+    cubeShader.setVec3("spotLight.specular", 1.0f, 1.0f, 1.0f);
+    cubeShader.setFloat("spotLight.constant", 1.0f);
+    cubeShader.setFloat("spotLight.linear", 0.09f);
+    cubeShader.setFloat("spotLight.quadratic", 0.032f);
+
+    for (int i = 0; i < 10; i += 1)
+    {
         glm::vec3 cubPos = cubePositions[i];
         glm::mat4 model = glm::mat4();
         model = glm::translate(model, cubPos);
@@ -295,7 +337,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
         cubeShader.setMatrix4fv("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
-//    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
 void draw()
@@ -330,7 +372,7 @@ void draw()
         deltaTime = temp;
         lastFrameTime = currentTime;
         processInput(window);
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
         drawLamp(lampShader, lampVAO);
