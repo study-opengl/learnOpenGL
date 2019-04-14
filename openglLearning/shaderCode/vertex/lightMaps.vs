@@ -21,7 +21,7 @@ void main() {
     //    Normal = normal;
     // mat3(transpose(inverse(model))) 法线矩阵 将法向量转移到世界空间
     // mat3(transpose(inverse(view * model))) 法线矩阵 将法向量转移到世界空间
-    Normal = mat3(transpose(inverse(view * model))) * normal;
+    Normal = mat3(transpose(inverse(model))) * normal;
     // 将灯光位置转到观察空间
     LampPos = vec3(view * vec4(lampPos, 1.0));
     TexCoords = aTexCoords;

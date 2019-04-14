@@ -309,7 +309,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
         cubeShader.setVec3(prefix + std::string("position"), position.x, position.y, position.z);
         cubeShader.setVec3(prefix + std::string("ambient"), ambientColor.x, ambientColor.y, ambientColor.z);
         cubeShader.setVec3(prefix + std::string("diffuse"), diffuseColor.x, diffuseColor.y, diffuseColor.z);
-        cubeShader.setVec3(prefix + std::string("specular"), 1.0f, 1.0f, 1.0f);
+        cubeShader.setVec3(prefix + std::string("specular"), 0.0f, 1.0f, 0.0f);
         cubeShader.setFloat(prefix + std::string("constant"), 1.0f);
         cubeShader.setFloat(prefix + std::string("linear"), 0.09f);
         cubeShader.setFloat(prefix + std::string("quadratic"), 0.032f);
