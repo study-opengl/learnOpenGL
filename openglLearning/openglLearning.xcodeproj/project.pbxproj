@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F90A975E226799560019267A /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F90A975A2267967B0019267A /* libassimp.4.1.0.dylib */; };
 		F91ACD792237ED4100391BD0 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F91ACDE4223B858100391BD0 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
 		F936D60D224A7B3700845DF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F936D60C224A7B3700845DF7 /* main.cpp */; };
@@ -281,6 +282,50 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F90A972A22678F440019267A /* IOSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IOSystem.hpp; sourceTree = "<group>"; };
+		F90A972B22678F440019267A /* Logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		F90A972C22678F440019267A /* IOStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IOStream.hpp; sourceTree = "<group>"; };
+		F90A972D22678F440019267A /* quaternion.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = quaternion.inl; sourceTree = "<group>"; };
+		F90A972E22678F440019267A /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
+		F90A972F22678F450019267A /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		F90A973022678F450019267A /* matrix4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix4x4.h; sourceTree = "<group>"; };
+		F90A973122678F450019267A /* Importer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Importer.hpp; sourceTree = "<group>"; };
+		F90A973222678F450019267A /* cfileio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cfileio.h; sourceTree = "<group>"; };
+		F90A973322678F450019267A /* vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2.h; sourceTree = "<group>"; };
+		F90A973422678F450019267A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		F90A973522678F450019267A /* light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
+		F90A973622678F450019267A /* types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
+		F90A973722678F450019267A /* cimport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cimport.h; sourceTree = "<group>"; };
+		F90A973822678F450019267A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		F90A973922678F450019267A /* matrix3x3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix3x3.h; sourceTree = "<group>"; };
+		F90A973A22678F450019267A /* color4.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = color4.inl; sourceTree = "<group>"; };
+		F90A973B22678F450019267A /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		F90A973C22678F450019267A /* ai_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ai_assert.h; sourceTree = "<group>"; };
+		F90A973D22678F450019267A /* NullLogger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NullLogger.hpp; sourceTree = "<group>"; };
+		F90A973E22678F450019267A /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quaternion.h; sourceTree = "<group>"; };
+		F90A973F22678F450019267A /* DefaultLogger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DefaultLogger.hpp; sourceTree = "<group>"; };
+		F90A974022678F450019267A /* material.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = material.inl; sourceTree = "<group>"; };
+		F90A974122678F450019267A /* metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metadata.h; sourceTree = "<group>"; };
+		F90A974222678F450019267A /* mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mesh.h; sourceTree = "<group>"; };
+		F90A974322678F450019267A /* Exporter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exporter.hpp; sourceTree = "<group>"; };
+		F90A974422678F450019267A /* vector2.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector2.inl; sourceTree = "<group>"; };
+		F90A974522678F450019267A /* matrix4x4.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = matrix4x4.inl; sourceTree = "<group>"; };
+		F90A974622678F450019267A /* vector3.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vector3.inl; sourceTree = "<group>"; };
+		F90A974722678F450019267A /* ProgressHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ProgressHandler.hpp; sourceTree = "<group>"; };
+		F90A974822678F450019267A /* cexport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cexport.h; sourceTree = "<group>"; };
+		F90A974922678F450019267A /* color4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = color4.h; sourceTree = "<group>"; };
+		F90A974A22678F450019267A /* anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = anim.h; sourceTree = "<group>"; };
+		F90A974B22678F450019267A /* postprocess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = postprocess.h; sourceTree = "<group>"; };
+		F90A974C22678F450019267A /* texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
+		F90A974D22678F450019267A /* matrix3x3.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = matrix3x3.inl; sourceTree = "<group>"; };
+		F90A974E22678F450019267A /* importerdesc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = importerdesc.h; sourceTree = "<group>"; };
+		F90A975022678F450019267A /* poppack1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = poppack1.h; sourceTree = "<group>"; };
+		F90A975122678F450019267A /* pstdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pstdint.h; sourceTree = "<group>"; };
+		F90A975222678F450019267A /* pushpack1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pushpack1.h; sourceTree = "<group>"; };
+		F90A975322678F450019267A /* vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector3.h; sourceTree = "<group>"; };
+		F90A975422678F450019267A /* scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scene.h; sourceTree = "<group>"; };
+		F90A975522678F450019267A /* LogStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LogStream.hpp; sourceTree = "<group>"; };
+		F90A975A2267967B0019267A /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libassimp.4.1.0.dylib; sourceTree = "<group>"; };
 		F91ACDE0223B68E000391BD0 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		F91ACDE2223B851900391BD0 /* main.old.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.old.cpp; sourceTree = "<group>"; };
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -376,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F964D4B32254FB4800580BB9 /* libglfw.3.2.dylib in Frameworks */,
+				F90A975E226799560019267A /* libassimp.4.1.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +485,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F90A972922678F440019267A /* assimp */ = {
+			isa = PBXGroup;
+			children = (
+				F90A972A22678F440019267A /* IOSystem.hpp */,
+				F90A972B22678F440019267A /* Logger.hpp */,
+				F90A972C22678F440019267A /* IOStream.hpp */,
+				F90A972D22678F440019267A /* quaternion.inl */,
+				F90A972E22678F440019267A /* defs.h */,
+				F90A972F22678F450019267A /* version.h */,
+				F90A973022678F450019267A /* matrix4x4.h */,
+				F90A973122678F450019267A /* Importer.hpp */,
+				F90A973222678F450019267A /* cfileio.h */,
+				F90A973322678F450019267A /* vector2.h */,
+				F90A973422678F450019267A /* config.h */,
+				F90A973522678F450019267A /* light.h */,
+				F90A973622678F450019267A /* types.h */,
+				F90A973722678F450019267A /* cimport.h */,
+				F90A973822678F450019267A /* camera.h */,
+				F90A973922678F450019267A /* matrix3x3.h */,
+				F90A973A22678F450019267A /* color4.inl */,
+				F90A973B22678F450019267A /* material.h */,
+				F90A973C22678F450019267A /* ai_assert.h */,
+				F90A973D22678F450019267A /* NullLogger.hpp */,
+				F90A973E22678F450019267A /* quaternion.h */,
+				F90A973F22678F450019267A /* DefaultLogger.hpp */,
+				F90A974022678F450019267A /* material.inl */,
+				F90A974122678F450019267A /* metadata.h */,
+				F90A974222678F450019267A /* mesh.h */,
+				F90A974322678F450019267A /* Exporter.hpp */,
+				F90A974422678F450019267A /* vector2.inl */,
+				F90A974522678F450019267A /* matrix4x4.inl */,
+				F90A974622678F450019267A /* vector3.inl */,
+				F90A974722678F450019267A /* ProgressHandler.hpp */,
+				F90A974822678F450019267A /* cexport.h */,
+				F90A974922678F450019267A /* color4.h */,
+				F90A974A22678F450019267A /* anim.h */,
+				F90A974B22678F450019267A /* postprocess.h */,
+				F90A974C22678F450019267A /* texture.h */,
+				F90A974D22678F450019267A /* matrix3x3.inl */,
+				F90A974E22678F450019267A /* importerdesc.h */,
+				F90A974F22678F450019267A /* Compiler */,
+				F90A975322678F450019267A /* vector3.h */,
+				F90A975422678F450019267A /* scene.h */,
+				F90A975522678F450019267A /* LogStream.hpp */,
+			);
+			path = assimp;
+			sourceTree = "<group>";
+		};
+		F90A974F22678F450019267A /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				F90A975022678F450019267A /* poppack1.h */,
+				F90A975122678F450019267A /* pstdint.h */,
+				F90A975222678F450019267A /* pushpack1.h */,
+			);
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		F90A9756226791960019267A /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				F90A975A2267967B0019267A /* libassimp.4.1.0.dylib */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		F936D60B224A7B3700845DF7 /* material */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +708,7 @@
 		F97EC309208397EE0084A898 = {
 			isa = PBXGroup;
 			children = (
+				F90A9756226791960019267A /* lib */,
 				F9695A892237EA32001E6436 /* courses */,
 				F9AEB3A1209C54D300163CD0 /* Includes */,
 				F95BF9712096F54200B52272 /* Resource */,
@@ -720,6 +833,7 @@
 		F9AEB3A1209C54D300163CD0 /* Includes */ = {
 			isa = PBXGroup;
 			children = (
+				F90A972922678F440019267A /* assimp */,
 			);
 			path = Includes;
 			sourceTree = "<group>";
@@ -1543,6 +1657,7 @@
 				DEVELOPMENT_TEAM = YGTXB4R2WQ;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1557,12 +1672,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -1605,6 +1725,7 @@
 				DEVELOPMENT_TEAM = YGTXB4R2WQ;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1613,11 +1734,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
@@ -1977,7 +2103,10 @@
 		F97EC30E208397EE0084A898 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "../glfw/3.2.1/include/**";
+				HEADER_SEARCH_PATHS = (
+					"../glfw/3.2.1/include/**",
+					"includes/**",
+				);
 				LIBRARY_SEARCH_PATHS = "../glfw/3.2.1/lib/**";
 				USER_HEADER_SEARCH_PATHS = "../glm/glm/**";
 			};
@@ -1986,7 +2115,10 @@
 		F97EC30F208397EE0084A898 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "../glfw/3.2.1/include/**";
+				HEADER_SEARCH_PATHS = (
+					"../glfw/3.2.1/include/**",
+					"includes/**",
+				);
 				LIBRARY_SEARCH_PATHS = "../glfw/3.2.1/lib/**";
 				USER_HEADER_SEARCH_PATHS = "../glm/glm/**";
 			};
@@ -2046,7 +2178,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "../glfw/3.2.1/include/**";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2103,7 +2238,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "../glfw/3.2.1/include/**";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/lib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
