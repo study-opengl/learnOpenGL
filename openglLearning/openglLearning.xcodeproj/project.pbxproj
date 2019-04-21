@@ -45,6 +45,8 @@
 		F95BF97D2097057B00B52272 /* texture.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97C2096FFD400B52272 /* texture.fs */; };
 		F95BF97E2097057B00B52272 /* texture.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97B2096FFBE00B52272 /* texture.vs */; };
 		F95BF98020970CC700B52272 /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
+		F963F44E226C45150032A4E3 /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F963F44D226C45150032A4E3 /* libassimp.4.1.0.dylib */; };
+		F963F44F226C45460032A4E3 /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F963F44D226C45150032A4E3 /* libassimp.4.1.0.dylib */; };
 		F964D4A32254F8A800580BB9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F964D4A22254F8A800580BB9 /* main.cpp */; };
 		F964D4A82254F91000580BB9 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
 		F964D4A92254F91B00580BB9 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
@@ -345,6 +347,8 @@
 		F95BF97B2096FFBE00B52272 /* texture.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = texture.vs; sourceTree = "<group>"; };
 		F95BF97C2096FFD400B52272 /* texture.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = texture.fs; sourceTree = "<group>"; };
 		F95BF97F20970CC100B52272 /* awesomeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = awesomeface.png; sourceTree = "<group>"; };
+		F963F44D226C45150032A4E3 /* libassimp.4.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.4.1.0.dylib; path = ../../../../../../usr/local/Cellar/assimp/4.1.0/lib/libassimp.4.1.0.dylib; sourceTree = "<group>"; };
+		F963F450226C46FA0032A4E3 /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		F964D4A02254F8A800580BB9 /* light-maps */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "light-maps"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F964D4A22254F8A800580BB9 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F964D4AF2254FAE000580BB9 /* lightMaps.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = lightMaps.vs; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F964D4B32254FB4800580BB9 /* libglfw.3.2.dylib in Frameworks */,
+				F963F44F226C45460032A4E3 /* libassimp.4.1.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +457,7 @@
 			files = (
 				F97EC32E2083A2950084A898 /* libglfw.3.2.dylib in Frameworks */,
 				F97EC32720839A340084A898 /* OpenGL.framework in Frameworks */,
+				F963F44E226C45150032A4E3 /* libassimp.4.1.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +567,7 @@
 				F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */,
 				F95BF91F2095B18D00B52272 /* ShaderProgram.hpp */,
 				F91ACDE0223B68E000391BD0 /* Camera.hpp */,
+				F963F450226C46FA0032A4E3 /* Mesh.hpp */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -800,6 +807,7 @@
 		F97EC32520839A340084A898 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F963F44D226C45150032A4E3 /* libassimp.4.1.0.dylib */,
 				F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */,
 				F97EC32620839A340084A898 /* OpenGL.framework */,
 			);
@@ -1671,6 +1679,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/usr/local/Cellar/assimp/4.1.0/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -1733,6 +1742,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/usr/local/Cellar/assimp/4.1.0/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -2104,6 +2114,9 @@
 					"includes/**",
 				);
 				LIBRARY_SEARCH_PATHS = "../glfw/3.2.1/lib/**";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRELINK_LIBS = "";
 				USER_HEADER_SEARCH_PATHS = "../glm/glm/**";
 			};
 			name = Debug;
@@ -2116,6 +2129,9 @@
 					"includes/**",
 				);
 				LIBRARY_SEARCH_PATHS = "../glfw/3.2.1/lib/**";
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				PRELINK_LIBS = "";
 				USER_HEADER_SEARCH_PATHS = "../glm/glm/**";
 			};
 			name = Release;
@@ -2177,6 +2193,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/usr/local/Cellar/assimp/4.1.0/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2237,6 +2254,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/usr/local/Cellar/assimp/4.1.0/lib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
