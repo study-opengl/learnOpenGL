@@ -19,6 +19,7 @@
 #include "gtc/type_ptr.hpp"
 #include "Camera.hpp"
 #include "openGlHelper.hpp"
+#include "Model.hpp"
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -340,10 +341,26 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     //    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
+void drawModel(ShaderProgram &shader, Model modelObject) {
+    shader.use();
+    glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
+    glm::mat4 view = camera.viewMatrix();
+    shader.setMatrix4fv("projection", projection);
+    shader.setMatrix4fv("view", view);
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.0, -1.75, 0.0));
+    model = glm::scale(model, glm::vec3(0.2f));
+    shader.setMatrix4fv("model", model);
+    modelObject.Draw(shader);
+}
+
 void draw()
 {
     ShaderProgram cubeShader = ShaderProgram("lightMaps.vs", "lightMaps.fs");
     ShaderProgram lampShader = ShaderProgram("cube.vs", "lamp.fs");
+    ShaderProgram modelShader = ShaderProgram("load_model.vs", "load_model.fs");
+    Model model = Model("nanosuit/nanosuit.obj");
     unsigned int lampVAO = genLampVAO(vertices, sizeof(vertices) / sizeof(float));
     unsigned int cubeVAO = genCubeVAO(vertices, sizeof(vertices) / sizeof(float));
     diffuseMap = textureGenarate("container2.png");
@@ -375,8 +392,9 @@ void draw()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
-        drawLamp(lampShader, lampVAO);
-        drawCube(cubeShader, cubeVAO);
+//        drawLamp(lampShader, lampVAO);
+//        drawCube(cubeShader, cubeVAO);
+        drawModel(modelShader, model);
         glfwPollEvents();
         glfwSwapBuffers(window);
     }

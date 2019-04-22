@@ -27,6 +27,8 @@
 		F91BC682226E2B2F00C6EBC7 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F91BC683226E2B2F00C6EBC7 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
 		F91BC68B226E2CC300C6EBC7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91BC689226E2BDB00C6EBC7 /* main.cpp */; };
+		F91BC68E226E301E00C6EBC7 /* load_model.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68C226E2FED00C6EBC7 /* load_model.fs */; };
+		F91BC68F226E301E00C6EBC7 /* load_model.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68D226E2FFF00C6EBC7 /* load_model.vs */; };
 		F936D60D224A7B3700845DF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F936D60C224A7B3700845DF7 /* main.cpp */; };
 		F936D611224A7B6D00845DF7 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F936D613224A8CC900845DF7 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
@@ -151,6 +153,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F91BC68E226E301E00C6EBC7 /* load_model.fs in CopyFiles */,
+				F91BC68F226E301E00C6EBC7 /* load_model.vs in CopyFiles */,
 				F91BC67B226E2B2F00C6EBC7 /* nanosuit in CopyFiles */,
 				F91BC67C226E2B2F00C6EBC7 /* lamp.vs in CopyFiles */,
 				F91BC67D226E2B2F00C6EBC7 /* matrix.jpg in CopyFiles */,
@@ -369,6 +373,8 @@
 		F91BC66D226E29C700C6EBC7 /* nanosuit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nanosuit; sourceTree = "<group>"; };
 		F91BC687226E2B2F00C6EBC7 /* load_model */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = load_model; sourceTree = BUILT_PRODUCTS_DIR; };
 		F91BC689226E2BDB00C6EBC7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		F91BC68C226E2FED00C6EBC7 /* load_model.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = load_model.fs; sourceTree = "<group>"; };
+		F91BC68D226E2FFF00C6EBC7 /* load_model.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = load_model.vs; sourceTree = "<group>"; };
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
 		F936D60C224A7B3700845DF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F936D612224A7C3900845DF7 /* material.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = material.fs; sourceTree = "<group>"; };
@@ -643,6 +649,7 @@
 		F95BF9232095C17E00B52272 /* vertex */ = {
 			isa = PBXGroup;
 			children = (
+				F91BC68D226E2FFF00C6EBC7 /* load_model.vs */,
 				F964D6212260950D00580BB9 /* lamp.vs */,
 				F95BF9252095C29600B52272 /* timing.vs */,
 				F95BF9402095D17D00B52272 /* vertexWithColor.vs */,
@@ -660,6 +667,7 @@
 		F95BF9242095C18B00B52272 /* fragment */ = {
 			isa = PBXGroup;
 			children = (
+				F91BC68C226E2FED00C6EBC7 /* load_model.fs */,
 				F95BF9272095C2DE00B52272 /* timing.fs */,
 				F95BF9412095D19400B52272 /* vertexWithColor.fs */,
 				F95BF97C2096FFD400B52272 /* texture.fs */,

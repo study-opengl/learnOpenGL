@@ -13,8 +13,6 @@
 #include "glad.h"
 #include "glm.hpp"
 
-#endif /* ShaderProgram_hpp */
-
 class ShaderProgram {
 public:
     unsigned int ID;
@@ -26,8 +24,10 @@ public:
     void setVec3(const std::string &name, float v0, float v1, float v2) const;
     void set4Float(const std::string &name, float v0, float v1, float v2, float v3) const;
     void setMatrix4fv(const std::string &name, glm::mat4 matrix) const;
-
+    
 private:
     unsigned int createShader(const char * const *source, GLenum type);
     void checkCompileErrors(unsigned int shader, std::string type);
 };
+
+#endif /* ShaderProgram_hpp */
