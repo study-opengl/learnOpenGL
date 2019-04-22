@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F91ACD792237ED4100391BD0 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
 		F91ACDE4223B858100391BD0 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
+		F91BC66E226E2A8200C6EBC7 /* nanosuit in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC66D226E29C700C6EBC7 /* nanosuit */; };
 		F936D60D224A7B3700845DF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F936D60C224A7B3700845DF7 /* main.cpp */; };
 		F936D611224A7B6D00845DF7 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F936D613224A8CC900845DF7 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
@@ -184,6 +185,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F91BC66E226E2A8200C6EBC7 /* nanosuit in CopyFiles */,
 				F964D6222260951200580BB9 /* lamp.vs in CopyFiles */,
 				F964D508225882EF00580BB9 /* matrix.jpg in CopyFiles */,
 				F964D4BB22550DAD00580BB9 /* container2_specular.png in CopyFiles */,
@@ -328,6 +330,8 @@
 		F90A975522678F450019267A /* LogStream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LogStream.hpp; sourceTree = "<group>"; };
 		F91ACDE0223B68E000391BD0 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		F91ACDE2223B851900391BD0 /* main.old.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.old.cpp; sourceTree = "<group>"; };
+		F91BC66C226E290D00C6EBC7 /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
+		F91BC66D226E29C700C6EBC7 /* nanosuit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = nanosuit; sourceTree = "<group>"; };
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
 		F936D60C224A7B3700845DF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F936D612224A7C3900845DF7 /* material.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = material.fs; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 		F95BF91D2095B15E00B52272 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				F91BC66C226E290D00C6EBC7 /* Model.hpp */,
 				F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */,
 				F95BF91F2095B18D00B52272 /* ShaderProgram.hpp */,
 				F91ACDE0223B68E000391BD0 /* Camera.hpp */,
@@ -644,6 +649,7 @@
 		F95BF9712096F54200B52272 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				F91BC66D226E29C700C6EBC7 /* nanosuit */,
 				F95BF9722096F55A00B52272 /* Images */,
 			);
 			path = Resource;
