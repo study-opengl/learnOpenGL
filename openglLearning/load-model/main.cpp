@@ -39,35 +39,35 @@ float vertices[] = {
     0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
     -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
-    
+
     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
     0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
     0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
     0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
     -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-    
+
     -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
     -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
     -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
     -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
     -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-    
+
     0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
     0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
     0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
     0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
     0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
     0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-    
+
     -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
     0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f,
     0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
     0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
     -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f,
     -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
-    
+
     -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
     0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
     0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
@@ -162,15 +162,15 @@ unsigned int genLampVAO(float *vertices, unsigned int length)
     unsigned int vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-    
+
     unsigned int vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, length * sizeof(float), vertices, GL_STATIC_DRAW);
-    
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glDeleteBuffers(1, &vbo);
@@ -182,12 +182,12 @@ unsigned int genCubeVAO(float *vertices, unsigned int length)
     unsigned int vao;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
-    
+
     unsigned int vbo;
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, length * sizeof(float), vertices, GL_STATIC_DRAW);
-    
+
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)(3 * sizeof(float)));
@@ -278,7 +278,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setInt("material.emission", 2);
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, emissionMap);
-    
+
     glm::vec3 lightColor = glm::vec3(1);
     // lightColor.x = sin(glfwGetTime() * 2.0f);
     // lightColor.y = sin(glfwGetTime() * 0.7f);
@@ -295,13 +295,13 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setVec3("light.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
     cubeShader.setFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
     cubeShader.setFloat("light.outterCutOff", glm::cos(glm::radians(17.5f)));
-    
+
     // 定向光
     cubeShader.setVec3("dirLight.direction", -0.2f, -1.0f, -0.3f);
     cubeShader.setVec3("dirLight.ambient", ambientColor.x, ambientColor.y, ambientColor.z);
     cubeShader.setVec3("dirLight.diffuse", diffuseColor.x / 2, diffuseColor.y / 2, diffuseColor.z / 2);
     cubeShader.setVec3("dirLight.specular", 0.5f, 0.5f, 0.5f);
-    
+
     // 4 个点光源
     for (int i = 0; i < 4; i++)
     {
@@ -315,7 +315,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
         cubeShader.setFloat(prefix + std::string("linear"), 0.09f);
         cubeShader.setFloat(prefix + std::string("quadratic"), 0.032f);
     }
-    
+
     // 聚光
     cubeShader.setVec3("spotLight.position", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
     cubeShader.setVec3("spotLight.direction", camera.cameraFront.x, camera.cameraFront.y, camera.cameraFront.z);
@@ -327,7 +327,7 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     cubeShader.setFloat("spotLight.constant", 1.0f);
     cubeShader.setFloat("spotLight.linear", 0.09f);
     cubeShader.setFloat("spotLight.quadratic", 0.032f);
-    
+
     for (int i = 0; i < 10; i += 1)
     {
         glm::vec3 cubPos = cubePositions[i];
@@ -341,7 +341,8 @@ void drawCube(ShaderProgram &cubeShader, unsigned int vao)
     //    glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
-void drawModel(ShaderProgram &shader, Model modelObject) {
+void drawModel(ShaderProgram &shader, Model modelObject)
+{
     shader.use();
     glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
     glm::mat4 view = camera.viewMatrix();
@@ -352,6 +353,27 @@ void drawModel(ShaderProgram &shader, Model modelObject) {
     model = glm::translate(model, glm::vec3(0.0, -1.75, 0.0));
     model = glm::scale(model, glm::vec3(0.2f));
     shader.setMatrix4fv("model", model);
+
+    glm::vec3 lightColor = glm::vec3(1);
+    glm::vec3 diffuseColor = lightColor * glm::vec3(0.8f);
+    glm::vec3 ambientColor = diffuseColor * glm::vec3(0.05f);
+    // 2 个点光源
+    for (int i = 0; i < 2; i++)
+    {
+        glm::vec3 position = pointLightPositions[i];
+        std::string prefix = std::string("pointLights[") + std::to_string(i) + std::string("].");
+        shader.setVec3(prefix + std::string("position"), position.x, position.y, position.z);
+        shader.setVec3(prefix + std::string("ambient"), ambientColor.x, ambientColor.y, ambientColor.z);
+        shader.setVec3(prefix + std::string("diffuse"), diffuseColor.x, diffuseColor.y, diffuseColor.z);
+        shader.setVec3(prefix + std::string("specular"), 1.0f, 1.0f, 1.0f);
+        shader.setFloat(prefix + std::string("constant"), 1.0f);
+        shader.setFloat(prefix + std::string("linear"), 0.09f);
+        shader.setFloat(prefix + std::string("quadratic"), 0.032f);
+    }
+
+    shader.setVec3("viewPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
+    shader.setFloat("material.shininess", 32.0f);
+
     modelObject.Draw(shader);
 }
 
@@ -392,8 +414,8 @@ void draw()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glEnable(GL_DEPTH_TEST);
-//        drawLamp(lampShader, lampVAO);
-//        drawCube(cubeShader, cubeVAO);
+        //        drawLamp(lampShader, lampVAO);
+        //        drawCube(cubeShader, cubeVAO);
         drawModel(modelShader, model);
         glfwPollEvents();
         glfwSwapBuffers(window);
