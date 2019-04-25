@@ -393,6 +393,7 @@ void draw()
     float lastFrameTime = 0.0f;
     bool firstRender = true;
     float diffTime = 0.0f;
+    glEnable(GL_DEPTH_TEST);
     while (!glfwWindowShouldClose(window))
     {
         float currentTime = (float)glfwGetTime();
@@ -413,7 +414,6 @@ void draw()
         processInput(window);
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glEnable(GL_DEPTH_TEST);
         //        drawLamp(lampShader, lampVAO);
         //        drawCube(cubeShader, cubeVAO);
         drawModel(modelShader, model);
