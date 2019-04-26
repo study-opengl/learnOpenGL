@@ -205,14 +205,15 @@ int createHelloTriangleWindow()
         -0.5f, 0.5f, -0.5f, 0.0f, 1.0f};
 
     float planeVertices[] = {
+        // 将 y 轴设置成 -0.501 稍微下移减少深度冲突
         // positions          // texture Coords (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). this will cause the floor texture to repeat)
-        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
-        -5.0f, -0.5f, 5.0f, 0.0f, 0.0f,
-        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
+        5.0f, -0.501f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.501f, 5.0f, 0.0f, 0.0f,
+        -5.0f, -0.501f, -5.0f, 0.0f, 2.0f,
 
-        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
-        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
-        5.0f, -0.5f, -5.0f, 2.0f, 2.0f};
+        5.0f, -0.501f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.501f, -5.0f, 0.0f, 2.0f,
+        5.0f, -0.501f, -5.0f, 2.0f, 2.0f};
 
     asLog("vertices size: %d", sizeof(cubeVertices));
     // 顶点数组对象
