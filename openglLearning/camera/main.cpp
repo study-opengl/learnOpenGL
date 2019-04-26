@@ -99,15 +99,19 @@ unsigned int textureGenarate(const char *imagePath)
     stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
     asLog("%s width: %d, height: %d, channels: %d", imagePath, width, height, nrChannels);
-    if (data) {
+    if (data)
+    {
         GLenum format = GL_RGB;
         // 当channel == 4 时，说明有alpha通道， == 3 时，只有rgb通道
-        if (nrChannels == 4) {
+        if (nrChannels == 4)
+        {
             format = GL_RGBA;
         }
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-    } else {
+    }
+    else
+    {
         asLog("can't load image at path: %s", imagePath);
     }
     stbi_image_free(data);
@@ -122,7 +126,8 @@ int createHelloTriangleWindow()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     GLFWwindow *window = glfwCreateWindow(screenWidth, screenHeight, "Hello Triangle", NULL, NULL);
-    if (window == NULL) {
+    if (window == NULL)
+    {
         asLog("Failed to create glfw window");
         glfwTerminate();
         return -1;
@@ -132,7 +137,8 @@ int createHelloTriangleWindow()
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     glfwSetCursorPosCallback(window, mousePositionCallback);
     glfwSetScrollCallback(window, mouseScrollCallback);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
         asLog("failed to initialize glad");
         glfwTerminate();
         return -1;
@@ -145,7 +151,7 @@ int createHelloTriangleWindow()
     /// @name 着色器程序
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
-    ShaderProgram shaderProgram = ShaderProgram("camera.vs", "camera.fs");
+    ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.1.1.depth_testing.fs");
 
     //    float vertices[] = {
     //        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
@@ -154,56 +160,67 @@ int createHelloTriangleWindow()
     //        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // 左下
     //        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // 左上
     //    };
-    float vertices[] = {
-        -0.5f, -0.5f,  -0.5f,   0.0f,    0.0f,
-        0.5f,  -0.5f,  -0.5f,   1.0f,    0.0f,
-        0.5f,  0.5f,   -0.5f,   1.0f,    1.0f,
-        0.5f,  0.5f,   -0.5f,   1.0f,    1.0f,
-        -0.5f, 0.5f,   -0.5f,   0.0f,    1.0f,
-        -0.5f, -0.5f,  -0.5f,   0.0f,    0.0f,
+    float cubeVertices[] = {
+        // positions          // texture Coords
+        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+        0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
 
-        -0.5f, -0.5f,  0.5f,    0.0f,    0.0f,
-        0.5f,  -0.5f,  0.5f,    1.0f,    0.0f,
-        0.5f,  0.5f,   0.5f,    1.0f,    1.0f,
-        0.5f,  0.5f,   0.5f,    1.0f,    1.0f,
-        -0.5f, 0.5f,   0.5f,    0.0f,    1.0f,
-        -0.5f, -0.5f,  0.5f,    0.0f,    0.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
+        -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
 
-        -0.5f, 0.5f,   0.5f,    1.0f,    0.0f,
-        -0.5f, 0.5f,   -0.5f,   1.0f,    1.0f,
-        -0.5f, -0.5f,  -0.5f,   0.0f,    1.0f,
-        -0.5f, -0.5f,  -0.5f,   0.0f,    1.0f,
-        -0.5f, -0.5f,  0.5f,    0.0f,    0.0f,
-        -0.5f, 0.5f,   0.5f,    1.0f,    0.0f,
+        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-        0.5f,  0.5f,   0.5f,    1.0f,    0.0f,
-        0.5f,  0.5f,   -0.5f,   1.0f,    1.0f,
-        0.5f,  -0.5f,  -0.5f,   0.0f,    1.0f,
-        0.5f,  -0.5f,  -0.5f,   0.0f,    1.0f,
-        0.5f,  -0.5f,  0.5f,    0.0f,    0.0f,
-        0.5f,  0.5f,   0.5f,    1.0f,    0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
 
-        -0.5f, -0.5f,  -0.5f,   0.0f,    1.0f,
-        0.5f,  -0.5f,  -0.5f,   1.0f,    1.0f,
-        0.5f,  -0.5f,  0.5f,    1.0f,    0.0f,
-        0.5f,  -0.5f,  0.5f,    1.0f,    0.0f,
-        -0.5f, -0.5f,  0.5f,    0.0f,    0.0f,
-        -0.5f, -0.5f,  -0.5f,   0.0f,    1.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
 
-        -0.5f, 0.5f,   -0.5f,   0.0f,    1.0f,
-        0.5f,  0.5f,   -0.5f,   1.0f,    1.0f,
-        0.5f,  0.5f,   0.5f,    1.0f,    0.0f,
-        0.5f,  0.5f,   0.5f,    1.0f,    0.0f,
-        -0.5f, 0.5f,   0.5f,    0.0f,    0.0f,
-        -0.5f, 0.5f,   -0.5f,   0.0f,    1.0f
-    };
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
+        0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+        -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
+        -0.5f, 0.5f, -0.5f, 0.0f, 1.0f};
 
-    asLog("vertices size: %d", sizeof(vertices));
+    float planeVertices[] = {
+        // positions          // texture Coords (note we set these higher than 1 (together with GL_REPEAT as texture wrapping mode). this will cause the floor texture to repeat)
+        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.5f, 5.0f, 0.0f, 0.0f,
+        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
+
+        5.0f, -0.5f, 5.0f, 2.0f, 0.0f,
+        -5.0f, -0.5f, -5.0f, 0.0f, 2.0f,
+        5.0f, -0.5f, -5.0f, 2.0f, 2.0f};
+
+    asLog("vertices size: %d", sizeof(cubeVertices));
     // 顶点数组对象
-    unsigned int vao = vaoGenerate(vertices, sizeof(vertices) / sizeof(float));
+    unsigned int cubeVao = vaoGenerate(cubeVertices, sizeof(cubeVertices) / sizeof(float));
+    unsigned int planeVao = vaoGenerate(planeVertices, sizeof(planeVertices) / sizeof(float));
 
-    unsigned int texture1 = textureGenarate("container.jpg");
-    unsigned int texture2 = textureGenarate("awesomeface.png");
+    unsigned int cubeTexture = textureGenarate("marble.jpg");
+    unsigned int planeTexture = textureGenarate("metal.png");
 
     // uncomment this call to draw in wireframe polygons. 线条模式
     //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -211,93 +228,82 @@ int createHelloTriangleWindow()
     // 激活着色器程序
     shaderProgram.use();
     shaderProgram.setInt("texture1", 0);
-    shaderProgram.setInt("texture2", 1);
+    //    shaderProgram.setInt("texture2", 1);
 
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture2);
 
-    //    glm::mat4 trans;
-    //    trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
-    //    trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-    //
-    //    unsigned int transformLoc = glGetUniformLocation(shaderProgram.ID, "transform");
-    //    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
-    glBindVertexArray(vao);
-
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f,  0.0f,   0.0f),
-        glm::vec3(2.0f,  5.0f,   -15.0f),
-        glm::vec3(-1.5f, -2.2f,  -2.5f),
-        glm::vec3(-3.8f, -2.0f,  -12.3f),
-        glm::vec3(2.4f,  -0.4f,  -3.5f),
-        glm::vec3(-1.7f, 3.0f,   -7.5f),
-        glm::vec3(1.3f,  -2.0f,  -2.5f),
-        glm::vec3(1.5f,  2.0f,   -2.5f),
-        glm::vec3(1.5f,  0.2f,   -1.5f),
-        glm::vec3(-1.3f, 1.0f,   -1.5f)
-    };
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    
     float expectedFrameTime = 1 / fps;
     // 当帧数过高时，usleep(diffTime * 1000000) 来降低帧数
     float diffTime = 0.0;
-    while (!glfwWindowShouldClose(window)) {
+    // 开启深度测试
+    while (!glfwWindowShouldClose(window))
+    {
         float currentFrame = glfwGetTime();
         float temp = currentFrame - lastFrame;
-        if (temp < expectedFrameTime) {
+        if (temp < expectedFrameTime)
+        {
             diffTime = expectedFrameTime - temp;
             usleep(diffTime * 1000000);
             temp += diffTime;
-//            asLog("sleep:%f", diffTime);
+            //            asLog("sleep:%f", diffTime);
         }
         deltaTime = temp;
         lastFrame = currentFrame;
-//        asLog("deltaTime:%f", deltaTime);
+        //        asLog("deltaTime:%f", deltaTime);
 
         progressInput(window);
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // 开启深度测试
-        glEnable(GL_DEPTH_TEST);
 
         shaderProgram.setFloat("mixValue", mixValue);
 
+        glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view;
         glm::mat4 projection;
 
         // 创建一个 lookAt 观察矩阵
-//        float radius = 10.0f;
+        //        float radius = 10.0f;
         // camera 随时间转圈
-//        float camX = sin((float)glfwGetTime()) * radius;
-//        float camZ = cos((float)glfwGetTime()) * radius;
-//        view = glm::lookAt(glm::vec3(camX, 0, camZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+        //        float camX = sin((float)glfwGetTime()) * radius;
+        //        float camZ = cos((float)glfwGetTime()) * radius;
+        //        view = glm::lookAt(glm::vec3(camX, 0, camZ), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
         view = camera.viewMatrix();
 
         // 投影矩阵
-        projection = glm::perspective(glm::radians(camera.zoom), (float)screenWidth  / (float)screenHeight, 0.1f, 100.0f);
+        projection = glm::perspective(glm::radians(camera.zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 
         shaderProgram.setMatrix4fv("view", view);
         shaderProgram.setMatrix4fv("projection", projection);
 
-        for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(glm::vec3); i += 1) {
-            glm::mat4 model;
-            model = glm::translate(model, cubePositions[i]);
-            float angle = i == 0 ? 1 : glm::radians(20.0f * i);
-            if (i % 3 == 0) {
-                angle = (float)glfwGetTime() * angle;
-            }
-            model = glm::rotate(model, angle, glm::vec3(1.5, 0.3, 0.5));
-            shaderProgram.setMatrix4fv("model", model);
-            // 画矩形
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        // cubes
+        glBindVertexArray(cubeVao);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, cubeTexture);
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+        shaderProgram.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+        shaderProgram.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        // floor
+        glBindVertexArray(planeVao);
+        glBindTexture(GL_TEXTURE_2D, planeTexture);
+        model = glm::mat4(1.0f);
+        shaderProgram.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        
+        glBindVertexArray(0);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
-    glDeleteVertexArrays(1, &vao);
+    glDeleteVertexArrays(1, &cubeVao);
+    glDeleteVertexArrays(1, &planeVao);
 
     glfwTerminate();
     return 0;
@@ -313,24 +319,37 @@ void frameBufferSizeCallback(GLFWwindow *window, int width, int height)
 
 void progressInput(GLFWwindow *window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
         asLog("escape pressed");
         glfwSetWindowShouldClose(window, true);
-    } else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+    {
         mixValue += 0.01;
         mixValue = mixValue > 1.0f ? 1.0f : mixValue;
         asLog("mix value: %f", mixValue);
-    } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+    {
         mixValue -= 0.01;
         mixValue = mixValue < 0.0f ? 0.0f : mixValue;
         asLog("mix value: %f", mixValue);
-    } else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
         camera.progressKeyboard(FORWARD, deltaTime);
-    } else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
         camera.progressKeyboard(BACKWARD, deltaTime);
-    } else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
         camera.progressKeyboard(LEFT, deltaTime);
-    } else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+    }
+    else if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    {
         camera.progressKeyboard(RIGHT, deltaTime);
     }
 }
@@ -343,8 +362,10 @@ float sensitivity = 0.05f;
 float pitch = 0.0f;
 // 偏航角
 float yaw = -90.0f; // 初始化成pitch =0, yaw = -90 相当于 camerafront = (0, 0, -1)
-void mousePositionCallback(GLFWwindow *window, double xpos, double ypos) {
-    if (firstMouse) {
+void mousePositionCallback(GLFWwindow *window, double xpos, double ypos)
+{
+    if (firstMouse)
+    {
         lastXpos = xpos;
         lastYpos = ypos;
         firstMouse = false;
@@ -355,11 +376,12 @@ void mousePositionCallback(GLFWwindow *window, double xpos, double ypos) {
     asLog("offsetX: %f, offsetY: %f", offsetX, offsetY);
     lastXpos = xpos;
     lastYpos = ypos;
-    
+
     camera.progressMouseMove(offsetX, offsetY);
 }
 
-void mouseScrollCallback(GLFWwindow *window, double xpos, double ypos) {
+void mouseScrollCallback(GLFWwindow *window, double xpos, double ypos)
+{
     asLog("xpos: %f, ypos: %f", xpos, ypos);
     camera.progressScroll(ypos);
 }

@@ -29,6 +29,21 @@
 		F91BC68B226E2CC300C6EBC7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F91BC689226E2BDB00C6EBC7 /* main.cpp */; };
 		F91BC68E226E301E00C6EBC7 /* load_model.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68C226E2FED00C6EBC7 /* load_model.fs */; };
 		F91BC68F226E301E00C6EBC7 /* load_model.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68D226E2FFF00C6EBC7 /* load_model.vs */; };
+		F925F030227361A00039B29A /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
+		F925F031227361A00039B29A /* glad.c in Sources */ = {isa = PBXBuildFile; fileRef = F97EC317208399C70084A898 /* glad.c */; };
+		F925F032227361A00039B29A /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
+		F925F033227361A00039B29A /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF9462096F26000B52272 /* stb_image.cpp */; };
+		F925F034227361A00039B29A /* asLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F97C435720922B9100D83128 /* asLog.cpp */; };
+		F925F035227361A00039B29A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9C1D974223943B0002D7006 /* main.cpp */; };
+		F925F037227361A00039B29A /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
+		F925F039227361A00039B29A /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
+		F925F03A227361A00039B29A /* container.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9732096F58800B52272 /* container.jpg */; };
+		F925F03B227361A00039B29A /* camera.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9C1D97D22394401002D7006 /* camera.fs */; };
+		F925F03C227361A00039B29A /* camera.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9C1D97E22394417002D7006 /* camera.vs */; };
+		F925F04622736A820039B29A /* marble.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F04422736A770039B29A /* marble.jpg */; };
+		F925F04722736A820039B29A /* metal.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F04522736A770039B29A /* metal.png */; };
+		F925F04822736A930039B29A /* 4.1.1.depth_testing.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F043227362BF0039B29A /* 4.1.1.depth_testing.fs */; };
+		F925F04922736A930039B29A /* 4.1.1.depth_testing.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F042227362590039B29A /* 4.1.1.depth_testing.vs */; };
 		F936D60D224A7B3700845DF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F936D60C224A7B3700845DF7 /* main.cpp */; };
 		F936D611224A7B6D00845DF7 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F936D613224A8CC900845DF7 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
@@ -164,6 +179,23 @@
 				F91BC681226E2B2F00C6EBC7 /* lightMaps.vs in CopyFiles */,
 				F91BC682226E2B2F00C6EBC7 /* lamp.fs in CopyFiles */,
 				F91BC683226E2B2F00C6EBC7 /* cube.vs in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925F038227361A00039B29A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				F925F04822736A930039B29A /* 4.1.1.depth_testing.fs in CopyFiles */,
+				F925F04922736A930039B29A /* 4.1.1.depth_testing.vs in CopyFiles */,
+				F925F04622736A820039B29A /* marble.jpg in CopyFiles */,
+				F925F04722736A820039B29A /* metal.png in CopyFiles */,
+				F925F039227361A00039B29A /* awesomeface.png in CopyFiles */,
+				F925F03A227361A00039B29A /* container.jpg in CopyFiles */,
+				F925F03B227361A00039B29A /* camera.fs in CopyFiles */,
+				F925F03C227361A00039B29A /* camera.vs in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +407,11 @@
 		F91BC689226E2BDB00C6EBC7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F91BC68C226E2FED00C6EBC7 /* load_model.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = load_model.fs; sourceTree = "<group>"; };
 		F91BC68D226E2FFF00C6EBC7 /* load_model.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = load_model.vs; sourceTree = "<group>"; };
+		F925F040227361A00039B29A /* 4.1.1_depth_testing */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 4.1.1_depth_testing; sourceTree = BUILT_PRODUCTS_DIR; };
+		F925F042227362590039B29A /* 4.1.1.depth_testing.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = 4.1.1.depth_testing.vs; sourceTree = "<group>"; };
+		F925F043227362BF0039B29A /* 4.1.1.depth_testing.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = 4.1.1.depth_testing.fs; sourceTree = "<group>"; };
+		F925F04422736A770039B29A /* marble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble.jpg; sourceTree = "<group>"; };
+		F925F04522736A770039B29A /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
 		F936D60C224A7B3700845DF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F936D612224A7C3900845DF7 /* material.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = material.fs; sourceTree = "<group>"; };
@@ -447,6 +484,14 @@
 			files = (
 				F91BC678226E2B2F00C6EBC7 /* libglfw.3.2.dylib in Frameworks */,
 				F91BC679226E2B2F00C6EBC7 /* libassimp.4.1.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925F036227361A00039B29A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F925F037227361A00039B29A /* libglfw.3.2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +694,7 @@
 		F95BF9232095C17E00B52272 /* vertex */ = {
 			isa = PBXGroup;
 			children = (
+				F925F042227362590039B29A /* 4.1.1.depth_testing.vs */,
 				F91BC68D226E2FFF00C6EBC7 /* load_model.vs */,
 				F964D6212260950D00580BB9 /* lamp.vs */,
 				F95BF9252095C29600B52272 /* timing.vs */,
@@ -679,6 +725,7 @@
 				F936D612224A7C3900845DF7 /* material.fs */,
 				F964D4B02254FAF800580BB9 /* lightMaps.fs */,
 				F964D5AB225BA70A00580BB9 /* caster_direction.fs */,
+				F925F043227362BF0039B29A /* 4.1.1.depth_testing.fs */,
 			);
 			path = fragment;
 			sourceTree = "<group>";
@@ -720,6 +767,8 @@
 		F95BF9722096F55A00B52272 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F925F04422736A770039B29A /* marble.jpg */,
+				F925F04522736A770039B29A /* metal.png */,
 				F964D507225882E700580BB9 /* matrix.jpg */,
 				F964D4BA22550DA400580BB9 /* container2_specular.png */,
 				F964D4B82255058600580BB9 /* container2.png */,
@@ -862,6 +911,7 @@
 				F964D4A02254F8A800580BB9 /* light-maps */,
 				F964D585225BA2B900580BB9 /* caster-direction */,
 				F91BC687226E2B2F00C6EBC7 /* load_model */,
+				F925F040227361A00039B29A /* 4.1.1_depth_testing */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -955,6 +1005,23 @@
 			name = load_model;
 			productName = "light-maps";
 			productReference = F91BC687226E2B2F00C6EBC7 /* load_model */;
+			productType = "com.apple.product-type.tool";
+		};
+		F925F02E227361A00039B29A /* 4.1.1_depth_testing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F925F03D227361A00039B29A /* Build configuration list for PBXNativeTarget "4.1.1_depth_testing" */;
+			buildPhases = (
+				F925F02F227361A00039B29A /* Sources */,
+				F925F036227361A00039B29A /* Frameworks */,
+				F925F038227361A00039B29A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 4.1.1_depth_testing;
+			productName = camera;
+			productReference = F925F040227361A00039B29A /* 4.1.1_depth_testing */;
 			productType = "com.apple.product-type.tool";
 		};
 		F936D609224A7B3700845DF7 /* material */ = {
@@ -1212,6 +1279,7 @@
 				F964D49F2254F8A800580BB9 /* light-maps */,
 				F964D584225BA2B900580BB9 /* caster-direction */,
 				F91BC66F226E2B2F00C6EBC7 /* load_model */,
+				F925F02E227361A00039B29A /* 4.1.1_depth_testing */,
 			);
 		};
 /* End PBXProject section */
@@ -1227,6 +1295,19 @@
 				F91BC673226E2B2F00C6EBC7 /* stb_image.cpp in Sources */,
 				F91BC674226E2B2F00C6EBC7 /* asLog.cpp in Sources */,
 				F91BC675226E2B2F00C6EBC7 /* Camera.hpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F925F02F227361A00039B29A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F925F030227361A00039B29A /* Camera.hpp in Sources */,
+				F925F031227361A00039B29A /* glad.c in Sources */,
+				F925F032227361A00039B29A /* ShaderProgram.cpp in Sources */,
+				F925F033227361A00039B29A /* stb_image.cpp in Sources */,
+				F925F034227361A00039B29A /* asLog.cpp in Sources */,
+				F925F035227361A00039B29A /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1577,123 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+		F925F03E227361A00039B29A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YGTXB4R2WQ;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F925F03F227361A00039B29A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YGTXB4R2WQ;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -2852,6 +3050,15 @@
 			buildConfigurations = (
 				F91BC685226E2B2F00C6EBC7 /* Debug */,
 				F91BC686226E2B2F00C6EBC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F925F03D227361A00039B29A /* Build configuration list for PBXNativeTarget "4.1.1_depth_testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F925F03E227361A00039B29A /* Debug */,
+				F925F03F227361A00039B29A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
