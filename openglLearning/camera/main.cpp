@@ -152,6 +152,7 @@ int createHelloTriangleWindow()
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
     ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.1.1.depth_testing.fs");
+    ShaderProgram shaderSingleColor = ShaderProgram("4.1.1.depth_testing.vs", "4.2.1.stencil_testing.fs");
 
     //    float vertices[] = {
     //        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
@@ -231,10 +232,10 @@ int createHelloTriangleWindow()
     shaderProgram.setInt("texture1", 0);
     //    shaderProgram.setInt("texture2", 1);
 
-
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
     glDepthFunc(GL_LESS);
-    
+
     float expectedFrameTime = 1 / fps;
     // 当帧数过高时，usleep(diffTime * 1000000) 来降低帧数
     float diffTime = 0.0;
@@ -255,10 +256,11 @@ int createHelloTriangleWindow()
         //        asLog("deltaTime:%f", deltaTime);
 
         progressInput(window);
-
+        
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+        shaderProgram.use();
         shaderProgram.setFloat("mixValue", mixValue);
 
         glm::mat4 model = glm::mat4(1.0f);
@@ -279,10 +281,25 @@ int createHelloTriangleWindow()
         shaderProgram.setMatrix4fv("view", view);
         shaderProgram.setMatrix4fv("projection", projection);
 
+        glStencilMask(0x00);
+
+        // floor
+        glBindVertexArray(planeVao);
+        glBindTexture(GL_TEXTURE_2D, planeTexture);
+        model = glm::mat4(1.0f);
+        shaderProgram.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        // glEnable(GL_STENCIL_TEST);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+        glStencilMask(0xFF);
+
         // cubes
         glBindVertexArray(cubeVao);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, cubeTexture);
+        model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
         shaderProgram.setMatrix4fv("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -291,14 +308,29 @@ int createHelloTriangleWindow()
         shaderProgram.setMatrix4fv("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
-        // floor
-        glBindVertexArray(planeVao);
-        glBindTexture(GL_TEXTURE_2D, planeTexture);
+        glDisable(GL_DEPTH_TEST);
+        glStencilFunc(GL_NOTEQUAL, 1.0, 0xFF);
+        glStencilMask(0x00);
+        // draw scaled cubes
+        shaderSingleColor.use();
+        shaderSingleColor.setMatrix4fv("view", view);
+        shaderSingleColor.setMatrix4fv("projection", projection);
+        float scale = 1.05f;
+        glBindVertexArray(cubeVao);
         model = glm::mat4(1.0f);
-        shaderProgram.setMatrix4fv("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        
+        model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        shaderSingleColor.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        shaderSingleColor.setMatrix4fv("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
         glBindVertexArray(0);
+        glEnable(GL_DEPTH_TEST);
+        glStencilMask(0xFF);
 
         glfwPollEvents();
         glfwSwapBuffers(window);

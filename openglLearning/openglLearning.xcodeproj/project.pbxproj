@@ -54,6 +54,7 @@
 		F936D618224A8CFB00845DF7 /* Camera.hpp in Sources */ = {isa = PBXBuildFile; fileRef = F91ACDE0223B68E000391BD0 /* Camera.hpp */; };
 		F936D619224A8DD700845DF7 /* material.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F936D612224A7C3900845DF7 /* material.fs */; };
 		F936D61A224A8FD600845DF7 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
+		F947014022743AEF00EED561 /* 4.2.1.stencil_testing.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F947013F22743AB200EED561 /* 4.2.1.stencil_testing.fs */; };
 		F95BF9212095BEDD00B52272 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */; };
 		F95BF92F2095C40A00B52272 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F95BF92E2095C40A00B52272 /* main.cpp */; };
 		F95BF9332095C64D00B52272 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F97EC32D2083A2950084A898 /* libglfw.3.2.dylib */; };
@@ -188,6 +189,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F947014022743AEF00EED561 /* 4.2.1.stencil_testing.fs in CopyFiles */,
 				F925F04822736A930039B29A /* 4.1.1.depth_testing.fs in CopyFiles */,
 				F925F04922736A930039B29A /* 4.1.1.depth_testing.vs in CopyFiles */,
 				F925F04622736A820039B29A /* marble.jpg in CopyFiles */,
@@ -415,6 +417,7 @@
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
 		F936D60C224A7B3700845DF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F936D612224A7C3900845DF7 /* material.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = material.fs; sourceTree = "<group>"; };
+		F947013F22743AB200EED561 /* 4.2.1.stencil_testing.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.2.1.stencil_testing.fs; sourceTree = "<group>"; };
 		F95BF91E2095B18D00B52272 /* ShaderProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
 		F95BF91F2095B18D00B52272 /* ShaderProgram.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderProgram.hpp; sourceTree = "<group>"; };
 		F95BF9252095C29600B52272 /* timing.vs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = timing.vs; sourceTree = "<group>"; };
@@ -713,6 +716,7 @@
 		F95BF9242095C18B00B52272 /* fragment */ = {
 			isa = PBXGroup;
 			children = (
+				F947013F22743AB200EED561 /* 4.2.1.stencil_testing.fs */,
 				F91BC68C226E2FED00C6EBC7 /* load_model.fs */,
 				F95BF9272095C2DE00B52272 /* timing.fs */,
 				F95BF9412095D19400B52272 /* vertexWithColor.fs */,
