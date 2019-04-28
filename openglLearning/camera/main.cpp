@@ -11,6 +11,7 @@
 #include "asLog.h"
 #include <unistd.h>
 #include <math.h>
+#include <vector>
 #include "stb_image.h"
 #include "glm.hpp"
 #include "gtc/matrix_transform.hpp"
@@ -89,14 +90,9 @@ unsigned int textureGenarate(const char *imagePath)
     unsigned int texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    // 为当前绑定的纹理对象设置环绕、过滤方式
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, nrChannels;
     // OpenGL要求y轴0.0坐标是在图片的底部的，但是图片的y轴0.0坐标通常在顶部。很幸运，stb_image.h能够在图像加载时帮助我们翻转y轴，只需要在加载任何图像前加入以下语句即可：
-    stbi_set_flip_vertically_on_load(true);
+    // stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load(imagePath, &width, &height, &nrChannels, 0);
     asLog("%s width: %d, height: %d, channels: %d", imagePath, width, height, nrChannels);
     if (data)
@@ -107,7 +103,15 @@ unsigned int textureGenarate(const char *imagePath)
         {
             format = GL_RGBA;
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        // 为当前绑定的纹理对象设置环绕、过滤方式
+        /**
+          * 注意，当采样纹理的边缘的时候，OpenGL会对边缘的值和纹理下一个重复的值进行插值（因为我们将它的环绕方式设置为了GL_REPEAT。这通常是没问题的，但是由于我们使用了透明值，纹理图像的顶部将会与底部边缘的纯色值进行插值。这样的结果是一个半透明的有色边框，你可能会看见它环绕着你的纹理四边形。要想避免这个，每当你alpha纹理的时候，请将纹理的环绕方式设置为GL_CLAMP_TO_EDGE：
+          */
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
@@ -151,7 +155,7 @@ int createHelloTriangleWindow()
     /// @name 着色器程序
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
-    ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.1.1.depth_testing.fs");
+    ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.3.1.blending_discard.fs");
 
     //    float vertices[] = {
     //        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
@@ -214,27 +218,45 @@ int createHelloTriangleWindow()
         5.0f, -0.501f, 5.0f, 2.0f, 0.0f,
         -5.0f, -0.501f, -5.0f, 0.0f, 2.0f,
         5.0f, -0.501f, -5.0f, 2.0f, 2.0f};
+    float transparentVertices[] = {
+        // positions         // texture Coords (swapped y coordinates because texture is flipped upside down)
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
+        0.0f, -0.5f, 0.0f, 0.0f, 1.0f,
+        1.0f, -0.5f, 0.0f, 1.0f, 1.0f,
 
+        0.0f, 0.5f, 0.0f, 0.0f, 0.0f,
+        1.0f, -0.5f, 0.0f, 1.0f, 1.0f,
+        1.0f, 0.5f, 0.0f, 1.0f, 0.0f};
     asLog("vertices size: %d", sizeof(cubeVertices));
     // 顶点数组对象
     unsigned int cubeVao = vaoGenerate(cubeVertices, sizeof(cubeVertices) / sizeof(float));
     unsigned int planeVao = vaoGenerate(planeVertices, sizeof(planeVertices) / sizeof(float));
+    unsigned int grassVao = vaoGenerate(transparentVertices, sizeof(transparentVertices) / sizeof(float));
 
     unsigned int cubeTexture = textureGenarate("marble.jpg");
     unsigned int planeTexture = textureGenarate("metal.png");
+    unsigned int grassTexture = textureGenarate("grass.png");
 
     // uncomment this call to draw in wireframe polygons. 线条模式
     //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    // transparent vegetation locations
+    // --------------------------------
+    std::vector<glm::vec3> vegetation{
+        glm::vec3(-1.5f, 0.0f, -0.48f),
+        glm::vec3(1.5f, 0.0f, 0.51f),
+        glm::vec3(0.0f, 0.0f, 0.7f),
+        glm::vec3(-0.3f, 0.0f, -2.3f),
+        glm::vec3(0.5f, 0.0f, -0.6f)};
 
     // 激活着色器程序
     shaderProgram.use();
     shaderProgram.setInt("texture1", 0);
     //    shaderProgram.setInt("texture2", 1);
 
-
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    
+
     float expectedFrameTime = 1 / fps;
     // 当帧数过高时，usleep(diffTime * 1000000) 来降低帧数
     float diffTime = 0.0;
@@ -297,7 +319,19 @@ int createHelloTriangleWindow()
         model = glm::mat4(1.0f);
         shaderProgram.setMatrix4fv("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        
+
+        // grass
+        glBindVertexArray(grassVao);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, grassTexture);
+        for (unsigned int i = 0; i < vegetation.size(); i++)
+        {
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, vegetation[i]);
+            shaderProgram.setMatrix4fv("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+        }
+
         glBindVertexArray(0);
 
         glfwPollEvents();

@@ -44,6 +44,8 @@
 		F925F04722736A820039B29A /* metal.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F04522736A770039B29A /* metal.png */; };
 		F925F04822736A930039B29A /* 4.1.1.depth_testing.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F043227362BF0039B29A /* 4.1.1.depth_testing.fs */; };
 		F925F04922736A930039B29A /* 4.1.1.depth_testing.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F925F042227362590039B29A /* 4.1.1.depth_testing.vs */; };
+		F92E0FE92275F2A20000B1E8 /* grass.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F92E0FE52275F2060000B1E8 /* grass.png */; };
+		F92E0FEA2275F2C50000B1E8 /* 4.3.1.blending_discard.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F92E0FE72275F21F0000B1E8 /* 4.3.1.blending_discard.fs */; };
 		F936D60D224A7B3700845DF7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F936D60C224A7B3700845DF7 /* main.cpp */; };
 		F936D611224A7B6D00845DF7 /* lamp.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9D0A0FC22407AC40062A0B2 /* lamp.fs */; };
 		F936D613224A8CC900845DF7 /* cube.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9CBA5CF223FFA170094A752 /* cube.vs */; };
@@ -188,6 +190,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F92E0FEA2275F2C50000B1E8 /* 4.3.1.blending_discard.fs in CopyFiles */,
+				F92E0FE92275F2A20000B1E8 /* grass.png in CopyFiles */,
 				F925F04822736A930039B29A /* 4.1.1.depth_testing.fs in CopyFiles */,
 				F925F04922736A930039B29A /* 4.1.1.depth_testing.vs in CopyFiles */,
 				F925F04622736A820039B29A /* marble.jpg in CopyFiles */,
@@ -412,6 +416,8 @@
 		F925F043227362BF0039B29A /* 4.1.1.depth_testing.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = 4.1.1.depth_testing.fs; sourceTree = "<group>"; };
 		F925F04422736A770039B29A /* marble.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marble.jpg; sourceTree = "<group>"; };
 		F925F04522736A770039B29A /* metal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metal.png; sourceTree = "<group>"; };
+		F92E0FE52275F2060000B1E8 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		F92E0FE72275F21F0000B1E8 /* 4.3.1.blending_discard.fs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = 4.3.1.blending_discard.fs; sourceTree = "<group>"; };
 		F936D60A224A7B3700845DF7 /* material */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = material; sourceTree = BUILT_PRODUCTS_DIR; };
 		F936D60C224A7B3700845DF7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F936D612224A7C3900845DF7 /* material.fs */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = material.fs; sourceTree = "<group>"; };
@@ -713,6 +719,7 @@
 		F95BF9242095C18B00B52272 /* fragment */ = {
 			isa = PBXGroup;
 			children = (
+				F92E0FE72275F21F0000B1E8 /* 4.3.1.blending_discard.fs */,
 				F91BC68C226E2FED00C6EBC7 /* load_model.fs */,
 				F95BF9272095C2DE00B52272 /* timing.fs */,
 				F95BF9412095D19400B52272 /* vertexWithColor.fs */,
@@ -767,6 +774,7 @@
 		F95BF9722096F55A00B52272 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F92E0FE52275F2060000B1E8 /* grass.png */,
 				F925F04422736A770039B29A /* marble.jpg */,
 				F925F04522736A770039B29A /* metal.png */,
 				F964D507225882E700580BB9 /* matrix.jpg */,
