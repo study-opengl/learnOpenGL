@@ -23,8 +23,8 @@ void progressInput(GLFWwindow *window);
 void mousePositionCallback(GLFWwindow *window, double xpos, double ypos);
 void mouseScrollCallback(GLFWwindow *window, double xpos, double ypos);
 
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
 const float fps = 70.0;
 
@@ -84,6 +84,29 @@ unsigned int vaoGenerate(float *vertices, unsigned int vertexCount)
     return vao;
 }
 
+unsigned int quadVaoGenerate(float *vertices, unsigned int vertexCount)
+{
+    unsigned int vao;
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+
+    unsigned int vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(float), vertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)(2 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    glDeleteBuffers(1, &vbo);
+    return vao;
+}
+
 unsigned int textureGenarate(const char *imagePath)
 {
     unsigned int texture;
@@ -107,7 +130,7 @@ unsigned int textureGenarate(const char *imagePath)
         {
             format = GL_RGBA;
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else
@@ -116,6 +139,33 @@ unsigned int textureGenarate(const char *imagePath)
     }
     stbi_image_free(data);
     return texture;
+}
+
+unsigned int framebuffer;
+unsigned int screentexture;
+unsigned int framebuffersGenerate() {
+    glGenFramebuffers(1, &framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+    // create a color attachment texture
+    glGenTextures(1, &screentexture);
+    glBindTexture(GL_TEXTURE_2D, screentexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screentexture, 0);
+
+    // create a renderbuffer object for depth and stencil attachment (we won't be sampling these)
+    unsigned int rbo;
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenWidth, screenHeight);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        asLog("ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    return framebuffer;
 }
 
 int createHelloTriangleWindow()
@@ -152,6 +202,7 @@ int createHelloTriangleWindow()
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
     ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.1.1.depth_testing.fs");
+    ShaderProgram screenShader = ShaderProgram("4.5.1.framebuffers_screen.vs", "4.5.1.framebuffers_screen.fs");
 
     //    float vertices[] = {
     //        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
@@ -215,10 +266,20 @@ int createHelloTriangleWindow()
         -5.0f, -0.501f, -5.0f, 0.0f, 2.0f,
         5.0f, -0.501f, -5.0f, 2.0f, 2.0f};
 
+    float quadVertices[] = {
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        -1.0f, -1.0f, 0.0f, 0.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
+
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
+        1.0f, 1.0f, 1.0f, 1.0f};
+
     asLog("vertices size: %d", sizeof(cubeVertices));
     // 顶点数组对象
     unsigned int cubeVao = vaoGenerate(cubeVertices, sizeof(cubeVertices) / sizeof(float));
     unsigned int planeVao = vaoGenerate(planeVertices, sizeof(planeVertices) / sizeof(float));
+    unsigned int quadVao = quadVaoGenerate(quadVertices, sizeof(quadVertices) / sizeof(float));
 
     unsigned int cubeTexture = textureGenarate("marble.jpg");
     unsigned int planeTexture = textureGenarate("metal.png");
@@ -231,10 +292,15 @@ int createHelloTriangleWindow()
     shaderProgram.setInt("texture1", 0);
     //    shaderProgram.setInt("texture2", 1);
 
+    screenShader.use();
+    screenShader.setInt("screenTexture", 0);
+
+    framebuffersGenerate();
+
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    
+
     float expectedFrameTime = 1 / fps;
     // 当帧数过高时，usleep(diffTime * 1000000) 来降低帧数
     float diffTime = 0.0;
@@ -256,9 +322,13 @@ int createHelloTriangleWindow()
 
         progressInput(window);
 
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+        glEnable(GL_DEPTH_TEST); // enable depth testing (is disabled for rendering screen-space quad)
+
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        shaderProgram.use();
         shaderProgram.setFloat("mixValue", mixValue);
 
         glm::mat4 model = glm::mat4(1.0f);
@@ -297,14 +367,26 @@ int createHelloTriangleWindow()
         model = glm::mat4(1.0f);
         shaderProgram.setMatrix4fv("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 6);
-        
+
         glBindVertexArray(0);
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glDisable(GL_DEPTH_TEST);
+
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        screenShader.use();
+        glBindVertexArray(quadVao);
+        glBindTexture(GL_TEXTURE_2D, screentexture);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
     }
     glDeleteVertexArrays(1, &cubeVao);
     glDeleteVertexArrays(1, &planeVao);
+    glDeleteVertexArrays(1, &quadVao);
 
     glfwTerminate();
     return 0;
