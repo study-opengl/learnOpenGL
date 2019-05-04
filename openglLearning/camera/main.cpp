@@ -100,7 +100,7 @@ unsigned int quadVaoGenerate(float *vertices, unsigned int vertexCount)
 
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glDeleteBuffers(1, &vbo);
@@ -143,7 +143,8 @@ unsigned int textureGenarate(const char *imagePath)
 
 unsigned int framebuffer;
 unsigned int screentexture;
-unsigned int framebuffersGenerate() {
+unsigned int framebuffersGenerate()
+{
     glGenFramebuffers(1, &framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
 
@@ -161,7 +162,8 @@ unsigned int framebuffersGenerate() {
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenWidth, screenHeight);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    {
         asLog("ERROR::FRAMEBUFFER:: Framebuffer is not complete!");
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -281,7 +283,7 @@ int createHelloTriangleWindow()
     unsigned int planeVao = vaoGenerate(planeVertices, sizeof(planeVertices) / sizeof(float));
     unsigned int quadVao = quadVaoGenerate(quadVertices, sizeof(quadVertices) / sizeof(float));
 
-    unsigned int cubeTexture = textureGenarate("marble.jpg");
+    unsigned int cubeTexture = textureGenarate("container.jpg");
     unsigned int planeTexture = textureGenarate("metal.png");
 
     // uncomment this call to draw in wireframe polygons. 线条模式
@@ -296,7 +298,6 @@ int createHelloTriangleWindow()
     screenShader.setInt("screenTexture", 0);
 
     framebuffersGenerate();
-
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
