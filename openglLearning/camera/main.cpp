@@ -204,7 +204,7 @@ int createHelloTriangleWindow()
     ///=============================================================================
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
     ShaderProgram shaderProgram = ShaderProgram("4.1.1.depth_testing.vs", "4.1.1.depth_testing.fs");
-    ShaderProgram screenShader = ShaderProgram("4.5.1.framebuffers_screen.vs", "4.5.1.framebuffers_screen.fs");
+    ShaderProgram screenShader = ShaderProgram("4.5.1.framebuffers_screen.vs", "4.5.2.sharpen.fs");
 
     //    float vertices[] = {
     //        //     ---- 位置 ----       ---- 颜色 ----     - 纹理坐标 -
