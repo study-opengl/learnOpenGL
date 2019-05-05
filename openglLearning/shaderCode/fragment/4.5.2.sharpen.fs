@@ -35,7 +35,14 @@ void main() {
         1.0 / 16, 2.0 / 16, 1.0 / 16
     );
 
-    float kernel[9] = blurKernel;
+    // 边缘检测(edge detection)核
+    float edgeDetectionKernel[9] = float[](
+        1, 1, 1,
+        1, -8, 1,
+        1, 1, 1
+    );
+
+    float kernel[9] = edgeDetectionKernel;
 
     vec3 sampleTex[9];
     for(int i = 0; i < 9; i += 1) {
