@@ -53,6 +53,12 @@ void main() {
     for(int i = 0; i < 9; i += 1) {
         col += sampleTex[i] * kernel[i];
     }
+    // 二值化，边界设置为 黑色
+    if ((col.r + col.g + col.b) / 3 > 0.3 || (col.r + col.g + col.b) / 3 < -0.3) {
+        col = vec3(0.0);
+    } else {
+        col = vec3(1.0);
+    }
 
     FragColor = vec4(col, 1.0);
 }
