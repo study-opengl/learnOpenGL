@@ -297,6 +297,7 @@ int createHelloTriangleWindow()
         progressInput(window);
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        // GL_DEPTH_BUFFER_BIT 将 深度值 设置为 1
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // 开启深度测试
         glEnable(GL_DEPTH_TEST);
@@ -316,19 +317,9 @@ int createHelloTriangleWindow()
         // 投影矩阵
         projection = glm::perspective(glm::radians(camera.zoom), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 
-        // 禁用深度写入
-        glDepthMask(GL_FALSE);
-        skyboxShader.use();
-        glBindVertexArray(skyboxVao);
-        skyboxShader.setInt("skybox", 0);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubmapTexture);
-        skyboxShader.setMatrix4fv("view", glm::mat4(glm::mat3(view)));
-        skyboxShader.setMatrix4fv("projection", projection);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        glBindVertexArray(0);
-
-        glDepthMask(GL_TRUE);
+        /**
+         * 使用提前深度测试，使天空盒的深度值为1（在顶点着色器里改z为w），先渲染盒子后渲染天空盒，优化性能
+         */
         // 激活着色器程序
         shaderProgram.use();
         glBindVertexArray(vao);
@@ -359,6 +350,23 @@ int createHelloTriangleWindow()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
         glBindVertexArray(0);
+
+        // 禁用深度写入
+        // glDepthMask(GL_FALSE);
+        glDepthFunc(GL_LEQUAL);
+        skyboxShader.use();
+        glBindVertexArray(skyboxVao);
+        skyboxShader.setInt("skybox", 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubmapTexture);
+        skyboxShader.setMatrix4fv("view", glm::mat4(glm::mat3(view)));
+        skyboxShader.setMatrix4fv("projection", projection);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+
+        // glDepthMask(GL_TRUE);
+
+        glBindVertexArray(0);
+        glDepthFunc(GL_LESS);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
