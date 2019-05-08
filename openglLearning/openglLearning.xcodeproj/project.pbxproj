@@ -136,6 +136,10 @@
 		F9AEB6E4209CD61300163CD0 /* transform.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9AEB6E1209CD5AF00163CD0 /* transform.vs */; };
 		F9B782ED228317710037761A /* 4.6.3_cubmaps.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9B782EB228317570037761A /* 4.6.3_cubmaps.fs */; };
 		F9B782EE228317710037761A /* 4.6.3_cubmaps.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F9B782EC228317620037761A /* 4.6.3_cubmaps.vs */; };
+		F9B782EF228329860037761A /* nanosuit in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC66D226E29C700C6EBC7 /* nanosuit */; };
+		F9B782F022832A310037761A /* load_model.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68C226E2FED00C6EBC7 /* load_model.fs */; };
+		F9B782F122832A310037761A /* load_model.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = F91BC68D226E2FFF00C6EBC7 /* load_model.vs */; };
+		F9B782F222832A480037761A /* libassimp.4.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F963F44D226C45150032A4E3 /* libassimp.4.1.0.dylib */; };
 		F9BA3C982237FCBD0022ECDC /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
 		F9BA3C992237FCBD0022ECDC /* container.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF9732096F58800B52272 /* container.jpg */; };
 		F9BA3C9A2237FCC40022ECDC /* awesomeface.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = F95BF97F20970CC100B52272 /* awesomeface.png */; };
@@ -169,6 +173,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				F9B782F022832A310037761A /* load_model.fs in CopyFiles */,
+				F9B782F122832A310037761A /* load_model.vs in CopyFiles */,
+				F9B782EF228329860037761A /* nanosuit in CopyFiles */,
 				F9B782ED228317710037761A /* 4.6.3_cubmaps.fs in CopyFiles */,
 				F9B782EE228317710037761A /* 4.6.3_cubmaps.vs in CopyFiles */,
 				F90394382281E7E200FE4947 /* 4.6.1_skybox.fs in CopyFiles */,
@@ -487,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F90394272281D6DA00FE4947 /* libglfw.3.2.dylib in Frameworks */,
+				F9B782F222832A480037761A /* libassimp.4.1.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1516,6 +1524,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/assimp/4.1.0/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1572,6 +1584,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/assimp/4.1.0/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

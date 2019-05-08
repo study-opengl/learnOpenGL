@@ -12,9 +12,17 @@ struct Material {
 out vec4 FragColor;
 
 in vec2 TexCoords;
+in vec3 Position;
+in vec3 Normal;
 
 uniform Material material;
+uniform samplerCube skybox;
+uniform vec3 cameraPos;
 
 void main() {
-    FragColor = texture(material.texture_diffuse1, TexCoords);
+    vec3 I = normalize(Position - cameraPos);
+    vec3 R = reflect(I, normalize(Normal));
+    // FragColor = texture(material.texture_diffuse1, TexCoords);
+    FragColor = vec4(texture(skybox, R).rgb, 1.0);
+    // FragColor = vec4(texture(skybox, R).rgb * 0.5 + FragColor.rgb * 0.5, 1.0);
 }

@@ -19,6 +19,7 @@
 #include "gtc/type_ptr.hpp"
 #include "Camera.hpp"
 #include "openGlHelper.hpp"
+#include "Model.hpp"
 
 int createHelloTriangleWindow();
 void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
@@ -159,6 +160,63 @@ unsigned int generateSkyboxVao(float *vertices, unsigned int vertexCount)
 
     return vao;
 }
+unsigned int cubmapTexture;
+void drawModel(ShaderProgram &shader, Model modelObject)
+{
+    shader.use();
+    glm::mat4 projection = glm::perspective(glm::radians(camera.zoom), screenWidth / screenHeight, 0.1f, 100.0f);
+    glm::mat4 view = camera.viewMatrix();
+    shader.setMatrix4fv("projection", projection);
+    shader.setMatrix4fv("view", view);
+
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(0.0, -1.75, 0.0));
+    model = glm::scale(model, glm::vec3(0.2f));
+    shader.setMatrix4fv("model", model);
+    shader.setVec3("cameraPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
+    shader.setInt("skybox", 3);
+    glActiveTexture(GL_TEXTURE0 + 3);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubmapTexture);
+    modelObject.Draw(shader);
+}
+
+void drawCubes(ShaderProgram &shaderProgram, unsigned int vao, unsigned int cubmapTexture, glm::vec3 cubePositions[], unsigned int cubeCount, glm::mat4 view, glm::mat4 projection)
+{
+    // 激活着色器程序
+    shaderProgram.use();
+    glBindVertexArray(vao);
+    // shaderProgram.setInt("texture1", 0);
+    // shaderProgram.setInt("texture2", 1);
+
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, texture1);
+    // glActiveTexture(GL_TEXTURE1);
+    // glBindTexture(GL_TEXTURE_2D, texture2);
+    // shaderProgram.setFloat("mixValue", mixValue);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, cubmapTexture);
+
+    shaderProgram.setInt("skybox", 0);
+    shaderProgram.setVec3("cameraPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
+    shaderProgram.setMatrix4fv("view", view);
+    shaderProgram.setMatrix4fv("projection", projection);
+
+    for (unsigned int i = 0; i < cubeCount; i += 1)
+    {
+        glm::mat4 model;
+        model = glm::translate(model, cubePositions[i]);
+        float angle = i == 0 ? 1 : glm::radians(20.0f * i);
+        if (i % 3 == 0)
+        {
+            angle = (float)glfwGetTime() * angle;
+        }
+        model = glm::rotate(model, angle, glm::vec3(1.5, 0.3, 0.5));
+        shaderProgram.setMatrix4fv("model", model);
+        // 画矩形
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
+    glBindVertexArray(0);
+}
 
 int createHelloTriangleWindow()
 {
@@ -195,6 +253,8 @@ int createHelloTriangleWindow()
     //    ShaderProgram shaderProgram = ShaderProgram("timing.vs", "timing.fs");
     ShaderProgram shaderProgram = ShaderProgram("4.6.3_cubmaps.vs", "4.6.3_cubmaps.fs");
     ShaderProgram skyboxShader = ShaderProgram("4.6.1_skybox.vs", "4.6.1_skybox.fs");
+    ShaderProgram modelShader = ShaderProgram("load_model.vs", "load_model.fs");
+    Model modelObject = Model("nanosuit/nanosuit.obj");
 
     float vertices[] = {
         -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
@@ -246,7 +306,7 @@ int createHelloTriangleWindow()
 
     // unsigned int texture1 = textureGenarate("container.jpg");
     // unsigned int texture2 = textureGenarate("awesomeface.png");
-    unsigned int cubmapTexture = loadCubemap(faces);
+    cubmapTexture = loadCubemap(faces);
 
     // uncomment this call to draw in wireframe polygons. 线条模式
     //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -313,40 +373,9 @@ int createHelloTriangleWindow()
         /**
          * 使用提前深度测试，使天空盒的深度值为1（在顶点着色器里改z为w），先渲染盒子后渲染天空盒，优化性能
          */
-        // 激活着色器程序
-        shaderProgram.use();
-        glBindVertexArray(vao);
-        // shaderProgram.setInt("texture1", 0);
-        // shaderProgram.setInt("texture2", 1);
 
-        // glActiveTexture(GL_TEXTURE0);
-        // glBindTexture(GL_TEXTURE_2D, texture1);
-        // glActiveTexture(GL_TEXTURE1);
-        // glBindTexture(GL_TEXTURE_2D, texture2);
-        // shaderProgram.setFloat("mixValue", mixValue);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubmapTexture);
-
-        shaderProgram.setInt("skybox", 0);
-        shaderProgram.setVec3("cameraPos", camera.cameraPos.x, camera.cameraPos.y, camera.cameraPos.z);
-        shaderProgram.setMatrix4fv("view", view);
-        shaderProgram.setMatrix4fv("projection", projection);
-
-        for (unsigned int i = 0; i < sizeof(cubePositions) / sizeof(glm::vec3); i += 1)
-        {
-            glm::mat4 model;
-            model = glm::translate(model, cubePositions[i]);
-            float angle = i == 0 ? 1 : glm::radians(20.0f * i);
-            if (i % 3 == 0)
-            {
-                angle = (float)glfwGetTime() * angle;
-            }
-            model = glm::rotate(model, angle, glm::vec3(1.5, 0.3, 0.5));
-            shaderProgram.setMatrix4fv("model", model);
-            // 画矩形
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-        glBindVertexArray(0);
+        // drawCubes(shaderProgram, vao, cubmapTexture, cubePositions, sizeof(cubePositions) / sizeof(glm::vec3), view, projection);
+        drawModel(modelShader, modelObject);
 
         // 禁用深度写入
         // glDepthMask(GL_FALSE);
