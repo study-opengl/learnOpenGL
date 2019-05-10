@@ -34,11 +34,11 @@ struct Texture
 
 class Mesh
 {
-  private:
+private:
     unsigned int VAO, VBO, EBO;
     void setupMesh();
 
-  public:
+public:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture> textures;
@@ -84,6 +84,7 @@ void Mesh::setupMesh()
 
 void Mesh::Draw(ShaderProgram shader)
 {
+    unsigned int ambientNbr = 1;
     unsigned int diffuseNbr = 1;
     unsigned int specularNbr = 1;
 
@@ -100,7 +101,11 @@ void Mesh::Draw(ShaderProgram shader)
         {
             number = std::to_string(specularNbr++);
         }
-        shader.setFloat(("material." + name + number), i);
+        else if (name == "texture_ambient")
+        {
+            number = std::to_string(ambientNbr++);
+        }
+        shader.setInt(("material." + name + number), i);
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
 

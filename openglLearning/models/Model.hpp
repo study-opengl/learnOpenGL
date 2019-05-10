@@ -17,7 +17,7 @@ unsigned int TextureFromFile(const std::string path, const std::string &director
 
 class Model
 {
-  private:
+private:
     std::vector<Mesh> meshes;
     std::string directory;
     std::vector<Texture> texture_loaded;
@@ -27,7 +27,7 @@ class Model
     Mesh processMesh(aiMesh *mesh, const aiScene *scene);
     std::vector<Texture> loadMaterialTextures(aiMaterial *material, aiTextureType type, std::string typeName);
 
-  public:
+public:
     Model(std::string path);
     void Draw(ShaderProgram shader);
 };
@@ -114,13 +114,16 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     if (mesh->mMaterialIndex >= 0)
     {
         aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+
+        std::vector<Texture> ambientMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
+        textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
+
         std::vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
         std::vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     }
-    
     return Mesh(verties, indices, textures);
 }
 
@@ -128,6 +131,7 @@ std::vector<Texture> Model::loadMaterialTextures(aiMaterial *material, aiTexture
 {
     std::vector<Texture> textures;
     unsigned int textureCount = material->GetTextureCount(type);
+    asLog("type: %d count: %d", type, textureCount);
     for (unsigned int i = 0; i < textureCount; i++)
     {
         aiString path;

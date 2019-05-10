@@ -254,7 +254,7 @@ int createHelloTriangleWindow()
     ShaderProgram shaderProgram = ShaderProgram("4.6.3_cubmaps.vs", "4.6.3_cubmaps.fs");
     ShaderProgram skyboxShader = ShaderProgram("4.6.1_skybox.vs", "4.6.1_skybox.fs");
     ShaderProgram modelShader = ShaderProgram("load_model.vs", "load_model.fs");
-    Model modelObject = Model("nanosuit/nanosuit.obj");
+    Model modelObject = Model("nanosuit_reflection/nanosuit.obj");
 
     float vertices[] = {
         -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
