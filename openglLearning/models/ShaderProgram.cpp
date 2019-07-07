@@ -12,15 +12,47 @@
 #include "asLog.h"
 #include "gtc/type_ptr.hpp"
 
+std::string readCodeFromFile(const char *path)
+{
+    std::string code = "";
+    std::ifstream fileStream;
+    fileStream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    try
+    {
+        fileStream.open(path);
+        std::stringstream strStream;
+        strStream << fileStream.rdbuf();
+        fileStream.close();
+        code = strStream.str();
+    }
+    catch (std::ifstream::failure e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return code;
+}
+
+ShaderProgram::ShaderProgram(const char *vertexPath, const char *geometryPath, const char *fragmentPath)
+{
+    init(vertexPath, geometryPath, fragmentPath);
+}
+
 ShaderProgram::ShaderProgram(const char *vertexPath, const char *fragmentPath)
 {
+    init(vertexPath, NULL, fragmentPath);
+}
+
+void ShaderProgram::init(const char *vertexPath, const char *geometryPath, const char *fragmentPath)
+{
     std::string vertexCode;
+    std::string geometryCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;
     std::ifstream fShaderFile;
     vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    try {
+    try
+    {
         vShaderFile.open(vertexPath);
         fShaderFile.open(fragmentPath);
         std::stringstream vShaderStream, fShaderStream;
@@ -30,23 +62,38 @@ ShaderProgram::ShaderProgram(const char *vertexPath, const char *fragmentPath)
         fShaderFile.close();
         vertexCode = vShaderStream.str();
         fragmentCode = fShaderStream.str();
-    } catch(std::ifstream::failure e) {
+    }
+    catch (std::ifstream::failure e)
+    {
         asLog("file not success read!");
     }
     const char *vShaderCode = vertexCode.c_str();
     const char *fShaderCode = fragmentCode.c_str();
 
-    unsigned int vertex, fragment;
+    unsigned int vertex, geometry = 0, fragment;
     vertex = createShader(&vShaderCode, GL_VERTEX_SHADER);
     fragment = createShader(&fShaderCode, GL_FRAGMENT_SHADER);
+    if (NULL != geometryPath)
+    {
+        const char *gShaderCode = readCodeFromFile(geometryPath).c_str();
+        geometry = createShader(&gShaderCode, GL_GEOMETRY_SHADER);
+    }
 
     ID = glCreateProgram();
     glAttachShader(ID, vertex);
+    if (geometry > 0)
+    {
+        glAttachShader(ID, geometry);
+    }
     glAttachShader(ID, fragment);
     glLinkProgram(ID);
     checkCompileErrors(ID, "Program");
 
     glDeleteShader(vertex);
+    if (geometry > 0)
+    {
+        glDeleteShader(geometry);
+    }
     glDeleteShader(fragment);
 }
 
@@ -99,15 +146,20 @@ void ShaderProgram::checkCompileErrors(unsigned int shader, std::string type)
 {
     int success;
     char infoLog[1024];
-    if (type != "Program") {
+    if (type != "Program")
+    {
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-        if (!success) {
+        if (!success)
+        {
             glGetShaderInfoLog(shader, 1024, NULL, infoLog);
             asLog("shader compile error, type: %s", infoLog);
         }
-    } else {
+    }
+    else
+    {
         glGetProgramiv(shader, GL_LINK_STATUS, &success);
-        if (!success) {
+        if (!success)
+        {
             glGetProgramInfoLog(shader, 1024, NULL, infoLog);
             asLog("program link error, type: %s", infoLog);
         }

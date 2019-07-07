@@ -13,9 +13,11 @@
 #include "glad.h"
 #include "glm.hpp"
 
-class ShaderProgram {
+class ShaderProgram
+{
 public:
     unsigned int ID;
+    ShaderProgram(const char *vertexPath, const char *geometryPath, const char *fragmentPath);
     ShaderProgram(const char *vertexPath, const char *fragmentPath);
     void use();
     void setBool(const std::string &name, bool value) const;
@@ -24,9 +26,10 @@ public:
     void setVec3(const std::string &name, float v0, float v1, float v2) const;
     void set4Float(const std::string &name, float v0, float v1, float v2, float v3) const;
     void setMatrix4fv(const std::string &name, glm::mat4 matrix) const;
-    
+
 private:
-    unsigned int createShader(const char * const *source, GLenum type);
+    void init(const char *vertexPath, const char *geometryPath, const char *fragmentPath);
+    unsigned int createShader(const char *const *source, GLenum type);
     void checkCompileErrors(unsigned int shader, std::string type);
 };
 
