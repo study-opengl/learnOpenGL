@@ -67,15 +67,18 @@ void ShaderProgram::init(const char *vertexPath, const char *geometryPath, const
     {
         asLog("file not success read!");
     }
+    if (NULL != geometryPath)
+    {
+        geometryCode = readCodeFromFile(geometryPath);
+    }
     const char *vShaderCode = vertexCode.c_str();
     const char *fShaderCode = fragmentCode.c_str();
+    const char *gShaderCode = geometryCode.c_str();
 
     unsigned int vertex, geometry = 0, fragment;
     vertex = createShader(&vShaderCode, GL_VERTEX_SHADER);
     fragment = createShader(&fShaderCode, GL_FRAGMENT_SHADER);
-    if (NULL != geometryPath)
-    {
-        const char *gShaderCode = readCodeFromFile(geometryPath).c_str();
+    if (NULL != geometryPath) {
         geometry = createShader(&gShaderCode, GL_GEOMETRY_SHADER);
     }
 
