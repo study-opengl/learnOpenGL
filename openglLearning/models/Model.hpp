@@ -18,9 +18,7 @@ unsigned int TextureFromFile(const std::string path, const std::string &director
 class Model
 {
   private:
-    std::vector<Mesh> meshes;
     std::string directory;
-    std::vector<Texture> texture_loaded;
 
     void loadModel(std::string path);
     void processNode(aiNode *node, const aiScene *scene);
@@ -28,6 +26,8 @@ class Model
     std::vector<Texture> loadMaterialTextures(aiMaterial *material, aiTextureType type, std::string typeName);
 
   public:
+    std::vector<Mesh> meshes;
+    std::vector<Texture> texture_loaded;
     Model(std::string path);
     void Draw(ShaderProgram shader);
 };
